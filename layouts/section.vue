@@ -5,8 +5,7 @@ import defaultCheetah from '../assets/cheetah.jpg'
 
 defineProps<{
   /**
-   * Optional override for the cover image.
-   * Pass a path relative to your deck's public/ directory (e.g. "/my-cover.jpg").
+   * Optional override for the section image.
    * Defaults to the cheetah asset bundled with the theme.
    */
   image?: string
@@ -14,13 +13,13 @@ defineProps<{
 </script>
 
 <template>
-  <div class="gepardec-cover slidev-layout">
+  <div class="gepardec-section slidev-layout">
     <div
-      class="cover-image"
+      class="section-image"
       :style="{ backgroundImage: `url(${image ?? defaultCheetah})` }"
     />
 
-    <div class="cover-content">
+    <div class="section-content">
       <slot />
     </div>
 
@@ -30,7 +29,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.gepardec-cover {
+.gepardec-section {
   padding: 0;
   height: 100%;
   display: grid;
@@ -39,16 +38,15 @@ defineProps<{
   align-items: stretch;
 }
 
-.cover-image {
+.section-image {
   height: 100%;
   width: 100%;
-  overflow: hidden;
   background-color: #000;
   background-size: cover;
   background-position: right center;
 }
 
-.cover-content {
+.section-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,24 +54,21 @@ defineProps<{
   z-index: 3;
 }
 
-.cover-content :deep(h1) {
-  font-size: 3.6rem;
+.section-content :deep(h1) {
+  font-size: 3.4rem;
   line-height: 1.05;
   color: var(--gepardec-yellow);
-  font-weight: 500;
   margin: 0;
 }
 
-.cover-content :deep(h2) {
-  font-size: 1.4rem;
+.section-content :deep(h2) {
+  font-size: 1.3rem;
   color: var(--gepardec-white);
-  font-weight: 400;
   margin-top: 0.6rem;
 }
 
-.cover-content :deep(p) {
+.section-content :deep(p) {
   color: var(--gepardec-white);
-  font-size: 1rem;
-  margin-top: 0.9rem;
+  font-size: 0.95rem;
 }
 </style>

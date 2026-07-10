@@ -1,50 +1,195 @@
 # slidev-theme-gepardec
 
-[![NPM version](https://img.shields.io/npm/v/slidev-theme-gepardec?color=3AB9D4&label=)](https://www.npmjs.com/package/slidev-theme-gepardec)
+A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 
-A (...) theme for [Slidev](https://github.com/slidevjs/slidev).
-
-<!--
-  Learn more about how to write a theme:
-  https://sli.dev/guide/write-theme.html
---->
-
-<!--
-  run `npm run dev` to check out the slides for more details of how to start writing a theme
--->
-
-<!--
-  Put some screenshots here to demonstrate your theme
-
-  Live demo: [...]
--->
-
-## Install
-
-Add the following frontmatter to your `slides.md`. Start Slidev then it will prompt you to install the theme automatically.
-
-<pre><code>---
-theme: <b>gepardec</b>
----</code></pre>
-
-Learn more about [how to use a theme](https://sli.dev/guide/theme-addon#use-theme).
+- Pure black background, Gepardec yellow (`#FFC800`) accents
+- Italic condensed typography (Barlow Semi Condensed)
+- `//` bullet markers in yellow, white content text
+- Cheetah-spot cluster and `gepardec` logo on every slide
+- No bordered boxes — clean, minimal aesthetic
 
 ## Layouts
 
-This theme provides the following layouts:
+| Layout       | Use for                                                   |
+|--------------|-----------------------------------------------------------|
+| `cover`      | Title slide. Cheetah image on left, big title on right.   |
+| `section`    | Section breaks. Same visual style as `cover`.             |
+| `default`    | Standard content. Title + `//` bullets, minimal layout.   |
+| `two-cols`   | Side-by-side content with a title above two columns.      |
+| `statement`  | Big bold statement, no decorations beyond logo + spots.   |
+| `end`        | Closing slide. "Danke." by default.                       |
 
-> TODO:
+## Install
 
-## Components
+### Local (recommended while iterating)
 
-This theme provides the following components:
+Drop this folder anywhere and reference it in frontmatter:
 
-> TODO:
+```yaml
+---
+theme: ./gepardec-slidev
+---
+```
 
-## Contributing
+### As an npm package
 
-- `npm install`
-- `npm run dev` to start theme preview of `example.md`
-- Edit the `example.md` and style to see the changes
-- `npm run export` to generate the preview PDF
-- `npm run screenshot` to generate the preview PNG
+```bash
+npm i slidev-theme-gepardec
+```
+
+```yaml
+---
+theme: gepardec
+---
+```
+
+## Brand assets
+
+The official Gepardec assets are bundled inside the theme at `assets/`:
+
+- `assets/cheetah.jpg` — cover/section image
+- `assets/logo.png` — footer wordmark
+- `assets/spots.png` — corner decoration
+
+They are imported by the Vue components and resolved through Vite's asset
+pipeline, so they work transparently no matter where your slide deck lives.
+To swap any of them, replace the file and rebuild.
+
+### Overriding the cover image per slide
+
+If you want a different image on a specific cover or section slide, pass an
+`image:` prop pointing at a file in **your own** `public/` directory:
+
+```yaml
+---
+layout: cover
+image: /my-custom-cover.jpg
+---
+```
+
+## Usage
+
+### Title slide
+
+```md
+---
+layout: cover
+---
+
+# Java Enterprise<br/>Modernization
+
+## Quarkus, Jakarta EE, OpenShift
+
+March 2026
+```
+
+### Section break
+
+```md
+---
+layout: section
+---
+
+# Part 2
+
+## Implementation
+```
+
+### Content slide
+
+Just write standard Markdown — title and bullets flow naturally:
+
+```md
+---
+layout: default
+---
+
+# Why modernize now?
+
+- NIS2 compliance pressure
+- Vendor support dropped
+- Dependency drift = release risk
+```
+
+### Two columns
+
+```md
+---
+layout: two-cols
+---
+
+::title::
+
+# Tech stack comparison
+
+::left::
+
+### Legacy
+- Java EE 7
+- Manual deploys
+
+::right::
+
+### Target
+- Jakarta EE 10
+- CI/CD
+```
+
+### Statement slide
+
+```md
+---
+layout: statement
+---
+
+# We only recommend<br/>**what we can technically justify.**
+```
+
+### End slide
+
+```md
+---
+layout: end
+---
+
+# Danke.
+```
+
+## Customization
+
+All theme colors and fonts are CSS variables in `styles/layout.css`:
+
+```css
+:root {
+  --gepardec-yellow: #FFC800;
+  --gepardec-black:  #000000;
+  --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
+  /* ... */
+}
+```
+
+Override them in a project-level `style.css`.
+
+## Bullet style opt-out
+
+All `<ul>` bullets render as `//` in Gepardec yellow. To opt out for a
+single list, wrap it in `.no-slash-bullets`:
+
+```md
+<div class="no-slash-bullets">
+
+- regular bullets here
+
+</div>
+```
+
+## Build the example
+
+```bash
+npm i
+npx slidev example.md
+```
+
+## License
+
+MIT — Gepardec IT Services GmbH

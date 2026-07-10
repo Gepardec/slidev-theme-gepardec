@@ -1,81 +1,107 @@
 ---
 theme: ./
-background: https://cover.sli.dev
+title: Gepardec Theme — Example Deck
+info: |
+  Example deck demonstrating the Gepardec Slidev theme.
+class: text-center
+highlighter: shiki
+drawings:
+  persist: false
+mdc: true
+layout: cover
 ---
 
-# Slidev Theme Starter
+# Java Enterprise<br/>Modernization
 
-Presentation slides for developers
+## Quarkus, Jakarta EE, OpenShift
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" flex="~ justify-center items-center gap-2" hover="bg-white bg-opacity-10">
-    Press Space for next page <div class="i-carbon:arrow-right inline-block"/>
-  </span>
-</div>
+A technical deep-dive — March 2026
 
 ---
-
-# What is Slidev?
-
-Slidev is a slide maker and presentation tool designed for developers. It includes the following features:
-
-- 📝 **Text-based** - focus on your content with Markdown, then style it later
-- 🎨 **Themable** - themes can be shared and reused as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
+layout: section
 ---
 
-# Navigation
+# Part 1
 
-Hover on the bottom-left corner to see the navigation's controls panel
-
-## Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>space</kbd> / <kbd>tab</kbd> / <kbd>right</kbd> | next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+## Why modernize now?
 
 ---
-layout: image-right
-image: https://cover.sli.dev
+layout: default
 ---
 
-# Code
+# Why modernize now?
 
-Use code snippets and get the highlighting directly!
+- NIS2 and DORA compliance pressure is real and dated
+- Java EE 7 and JBoss EAP 6 are out of vendor support
+- Dependency drift turns every release into a risk event
+- Modernization unlocks **velocity**, not just compliance
 
-```ts
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
+---
+layout: default
+---
 
-function updateUser(id: number, update: Partial<User>) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
+# Our approach
+
+- Gradual modernization — step-by-step with a clear target architecture
+- **Bridge, not endpoint** — JSF stays while Quarkus comes in
+- Security integrated, not bolted on
+- Continuity through stable Austrian teams
+
+---
+layout: two-cols
+---
+
+::title::
+
+# Tech stack comparison
+
+::left::
+
+### Legacy
+- Java EE 7
+- JBoss EAP 6
+- Manual dependency updates
+- Monolithic deploys
+
+::right::
+
+### Target
+- Jakarta EE 10 + Quarkus
+- OpenShift / Kubernetes
+- Automated via Renovate
+- CI/CD with rollback
+
+---
+layout: default
+---
+
+# Code example — CDI events
+
+```java
+@ApplicationScoped
+public class OrderService {
+
+  @Inject
+  Event<OrderPlaced> orderEvents;
+
+  @Transactional
+  public void placeOrder(Order order) {
+    repository.save(order);
+    orderEvents.fire(new OrderPlaced(order.id()));
+  }
 }
 ```
 
+Use `@ObservesAsync` on the consumer for true async handling.
+
 ---
-layout: center
-class: "text-center"
+layout: statement
 ---
 
-# Learn More
+# We only recommend<br/>**what we can technically justify.**
 
-[Documentation](https://sli.dev) / [GitHub Repo](https://github.com/slidevjs/slidev)
+---
+layout: end
+---
+
+# Danke.
