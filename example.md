@@ -48,6 +48,20 @@ layout: default
 - Continuity through stable Austrian teams
 
 ---
+layout: default
+---
+
+# The migration path
+
+An ordered list keeps its numbers, tinted in Gepardec yellow:
+
+1. Inventory the estate — modules, dependencies, CVEs
+2. Establish a target architecture and a strangler boundary
+3. Migrate leaf services to Quarkus behind the existing JSF shell
+4. Automate dependency updates and wire up CI/CD with rollback
+5. Decommission the legacy monolith once traffic has moved
+
+---
 layout: two-cols
 ---
 
@@ -75,9 +89,34 @@ layout: two-cols
 layout: default
 ---
 
+# Effort vs. risk at a glance
+
+| Workload            | Effort | Risk   | Priority |
+|---------------------|--------|--------|----------|
+| Auth & session      | Medium | High   | First    |
+| Reporting batch     | Low    | Low    | Later    |
+| Order processing    | High   | High   | Phased   |
+
+> Migrate high-risk, high-traffic paths first — that's where support
+> gaps hurt most.
+
+---
+layout: section
+---
+
+# Part 2
+
+## Implementation
+
+---
+layout: default
+---
+
 # Code example — CDI events
 
-```java
+Line-highlight markers focus the audience on what matters:
+
+```java {4-5,10}
 @ApplicationScoped
 public class OrderService {
 
