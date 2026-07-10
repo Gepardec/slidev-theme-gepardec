@@ -41,12 +41,12 @@ The bundled `example.md` uses `theme: ./` because it lives in the theme root.
 ### As an npm package
 
 ```bash
-npm i slidev-theme-gepardec
+npm i @gepardec/slidev-theme-gepardec
 ```
 
 ```yaml
 ---
-theme: gepardec
+theme: '@gepardec/slidev-theme-gepardec'
 ---
 ```
 

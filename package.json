@@ -1,7 +1,20 @@
 {
-  "name": "slidev-theme-gepardec",
+  "name": "@gepardec/slidev-theme-gepardec",
   "version": "0.0.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": [
+    "layouts",
+    "components",
+    "styles",
+    "setup",
+    "assets",
+    "uno.config.ts",
+    "example.md"
+  ],
   "description": "Gepardec-branded Slidev theme — black background, gepardec yellow accents, italic condensed typography, // bullet markers.",
   "keywords": [
     "slidev-theme",
@@ -10,6 +23,7 @@
   ],
   "author": "Gepardec IT Services GmbH",
   "license": "MIT",
+  "packageManager": "pnpm@11.11.0",
   "engines": {
     "node": ">=20.12.0",
     "slidev": ">=0.49.0"
@@ -24,7 +38,8 @@
     "@slidev/types": "^52.16.0"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.16.0"
+    "@slidev/cli": "^52.16.0",
+    "semantic-release": "^25.0.5"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
   "slidev": {
