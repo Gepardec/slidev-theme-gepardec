@@ -8,3 +8,6 @@ dist
 components.d.ts
 .playwright-mcp
 exports
+
+# APM dependencies
+apm_modules/
