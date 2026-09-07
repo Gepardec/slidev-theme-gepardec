@@ -76,6 +76,36 @@ An ordered list keeps its numbers, tinted in Gepardec yellow:
 5. Decommission the legacy monolith once traffic has moved
 
 ---
+layout: quadrants
+---
+
+# Modernization pillars
+
+::one::
+
+### Architecture
+Strangler boundary around the JSF shell, Quarkus services behind it.
+No big-bang cutover — every step ships on its own.
+
+::two::
+
+### Security
+Keycloak-backed auth, integrated from the first service instead of
+bolted on once the estate is already live.
+
+::three::
+
+### Delivery
+CI/CD with automated rollback, Renovate keeping the dependency
+tree current so releases stop being risk events.
+
+::four::
+
+### Operations
+OpenShift as the target platform, with the observability stack
+in place before the first workload moves.
+
+---
 layout: two-cols
 ---
 

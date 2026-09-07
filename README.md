@@ -15,6 +15,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `cover`      | Title slide. Cheetah bleeding off the left, title block right. |
 | `section`    | Section breaks ("Zwischenfolie"). Sujet + centred title.  |
 | `agenda`     | Agenda slide. Headline + numbered `// n` entries.         |
+| `quadrants`  | Headline + four `//` subheading blocks on a 2x2 raster.   |
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
 | `two-cols`   | Side-by-side content with a title above two columns.      |
 | `statement`  | Big bold statement, logo only — no cheetah/spots.         |
@@ -24,7 +25,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 
 `cover`, `section`, and `contact` render the cheetah sujet and corner spots —
 all three share the master's single background placement. `agenda` carries the
-spots and the logo, but no sujet.
+spots and the logo, but no sujet — so does `quadrants`.
 `default`, `two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
 unstyled centered container — handy for full-bleed custom content.
 
@@ -178,6 +179,48 @@ layout: default
 - Vendor support dropped
 - Dependency drift = release risk
 ```
+
+### Subheading blocks
+
+A one-to-one rebuild of the corporate "Subheadings" slide: an uppercase yellow
+headline over four text blocks on a 2x2 raster. The `//` in front of each
+subheading is added by the layout, so write the subheading as plain text:
+
+```md
+---
+layout: quadrants
+---
+
+# Modernization pillars
+
+::one::
+
+### Architecture
+Strangler boundary around the JSF shell, Quarkus services behind it.
+
+::two::
+
+### Security
+Keycloak-backed auth, integrated from the first service.
+
+::three::
+
+### Delivery
+CI/CD with automated rollback, Renovate keeping dependencies current.
+
+::four::
+
+### Operations
+OpenShift as the target platform, observability in place first.
+```
+
+The headline can sit in the default slot (as above) or in an explicit
+`::title::` slot, like `two-cols`. Blocks fill the raster in order — supply
+only `::one::` and `::two::` and you get the top row.
+
+Inside a block, paragraphs run at the master's uniform line pitch with no gap
+between them, exactly as in the reference slide. Use a second block or a `//`
+list when copy needs to be set apart.
 
 ### Two columns
 
