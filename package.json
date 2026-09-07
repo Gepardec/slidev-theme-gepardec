@@ -21,6 +21,9 @@
     "slidev",
     "gepardec"
   ],
+  "repository": {
+    "url": "https://github.com/Gepardec/slidev-theme-gepardec"
+  },
   "author": "Gepardec IT Services GmbH",
   "license": "MIT",
   "packageManager": "pnpm@11.11.0",
