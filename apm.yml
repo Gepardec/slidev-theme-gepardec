@@ -10,6 +10,7 @@ targets:
 dependencies:
   apm:
     - slidevjs/slidev/skills/slidev
+    - anthropics/skills/skills/skill-creator
   mcp: []
 includes: auto
 scripts: {}
