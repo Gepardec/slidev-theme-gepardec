@@ -5,7 +5,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 - Pure black background, Gepardec yellow (`#FFC800`) accents
 - Italic condensed typography (Barlow Semi Condensed) + JetBrains Mono for code
 - `//` bullet markers in yellow, white content text
-- `gepardec` logo on every content slide; cheetah sujet + spot cluster on cover/section
+- `gepardec` logo and corner spots on every slide; cheetah sujet on cover/section/contact
 - No bordered content boxes — clean, minimal aesthetic
 
 ## Layouts
@@ -18,16 +18,16 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `quadrants`  | Headline + four `//` subheading blocks on a 2x2 raster.   |
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
 | `two-cols`   | Side-by-side content with a title above two columns.      |
-| `statement`  | Big bold statement, logo only — no cheetah/spots.         |
+| `statement`  | Big bold statement — no cheetah.                          |
 | `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
 | `end`        | Closing slide. "Danke." by default.                       |
 | `intro`      | Plain vertically-centered slot. No branding chrome.       |
 
-`cover`, `section`, and `contact` render the cheetah sujet and corner spots —
-all three share the master's single background placement. `agenda` carries the
-spots and the logo, but no sujet — so does `quadrants`.
-`default`, `two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
-unstyled centered container — handy for full-bleed custom content.
+Every layout carries the footer logo and the corner spots, as the corporate
+master does. `cover`, `section`, and `contact` add the cheetah sujet — all three
+share the master's single background placement. `intro` is the one exception: an
+unstyled centered container with no branding chrome — handy for full-bleed
+custom content.
 
 ## Install
 

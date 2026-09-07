@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GepardecLogo from '../components/GepardecLogo.vue'
+import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import GepardecLogo from '../components/GepardecLogo.vue'
       </div>
     </div>
 
+    <CornerSpots />
     <GepardecLogo />
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GepardecLogo from '../components/GepardecLogo.vue'
+import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import GepardecLogo from '../components/GepardecLogo.vue'
       <slot />
     </div>
 
+    <CornerSpots />
     <GepardecLogo />
   </div>
 </template>
@@ -30,7 +32,4 @@ import GepardecLogo from '../components/GepardecLogo.vue'
 .content :deep(> h2:first-child) {
   margin-bottom: 1.4rem;
 }
-
-/* Constrain content width so it doesn't run under the spots cluster */
-
 </style>
