@@ -19,6 +19,19 @@ Oliver Tod
 March 2026
 
 ---
+layout: agenda
+---
+
+# Agenda
+
+- Why modernize now
+- Our approach
+- The migration path
+- Tech stack comparison
+- Effort vs. risk
+- Implementation and next steps 
+
+---
 layout: section
 ---
 

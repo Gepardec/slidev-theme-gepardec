@@ -14,6 +14,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 |--------------|-----------------------------------------------------------|
 | `cover`      | Title slide. Cheetah bleeding off the left, title block right. |
 | `section`    | Section breaks ("Zwischenfolie"). Sujet + centred title.  |
+| `agenda`     | Agenda slide. Headline + numbered `// n` entries.         |
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
 | `two-cols`   | Side-by-side content with a title above two columns.      |
 | `statement`  | Big bold statement, logo only — no cheetah/spots.         |
@@ -22,7 +23,8 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `intro`      | Plain vertically-centered slot. No branding chrome.       |
 
 `cover`, `section`, and `contact` render the cheetah sujet and corner spots —
-all three share the master's single background placement.
+all three share the master's single background placement. `agenda` carries the
+spots and the logo, but no sujet.
 `default`, `two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
 unstyled centered container — handy for full-bleed custom content.
 
@@ -116,6 +118,49 @@ layout: section
 
 ## Implementation
 ```
+
+### Agenda slide
+
+A 1:1 rebuild of the corporate Agenda slide: the headline top-left, then the
+entries numbered `// 1`, `// 2`, … in Gepardec yellow. The master lays them out
+in a table, but its own first row is a note to set that table transparent once
+it is filled in — so nothing is drawn here. The table survives only as geometry:
+the column positions and the row pitch.
+
+Write it as ordinary Markdown — the first heading is the headline, the list
+below it becomes the entries:
+
+```md
+---
+layout: agenda
+---
+
+# Agenda
+
+- Why modernize now
+- Our approach
+- The migration path
+- Tech stack comparison
+```
+
+The headline is uppercased by the layout, so `# Agenda` renders as `AGENDA`.
+Bullet lists and ordered lists render identically — the number always comes from
+the entry's position, so reordering the list renumbers it.
+
+#### More than six entries
+
+Six is what the master fits in a column. From the seventh entry on, the layout
+splits into two halves and keeps filling the left one first, exactly as the
+master's second page does — `// 1` through `// 6` down the left, `// 7` through
+`// 12` down the right. Nothing to configure: write seven or more entries and
+the split happens.
+
+Twelve is where the master stops. Past that a third column would start off the
+right edge of the slide, so split a longer agenda over two slides.
+
+A wordy entry wraps rather than being clipped, and deepens its row — in two
+column mode both halves share their row tracks, so the entry opposite it moves
+down with it, the way a table row behaves.
 
 ### Content slide
 
