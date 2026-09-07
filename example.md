@@ -3,7 +3,6 @@ theme: ./
 title: Gepardec Theme — Example Deck
 info: |
   Example deck demonstrating the Gepardec Slidev theme.
-class: text-center
 highlighter: shiki
 drawings:
   persist: false
@@ -13,9 +12,11 @@ layout: cover
 
 # Java Enterprise<br/>Modernization
 
-## Quarkus, Jakarta EE, OpenShift
+## Quarkus & Jakarta EE
 
-A technical deep-dive — March 2026
+Oliver Tod
+
+March 2026
 
 ---
 layout: section

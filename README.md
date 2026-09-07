@@ -5,15 +5,15 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 - Pure black background, Gepardec yellow (`#FFC800`) accents
 - Italic condensed typography (Barlow Semi Condensed) + JetBrains Mono for code
 - `//` bullet markers in yellow, white content text
-- `gepardec` logo on every content slide; cheetah image + spot cluster on cover/section
+- `gepardec` logo on every content slide; cheetah sujet + spot cluster on cover/section
 - No bordered content boxes — clean, minimal aesthetic
 
 ## Layouts
 
 | Layout       | Use for                                                   |
 |--------------|-----------------------------------------------------------|
-| `cover`      | Title slide. Cheetah image on left, big title on right.   |
-| `section`    | Section breaks. Same split visual style as `cover`.       |
+| `cover`      | Title slide. Cheetah bleeding off the left, title block right. |
+| `section`    | Section breaks ("Zwischenfolie"). Sujet + centred title.  |
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
 | `two-cols`   | Side-by-side content with a title above two columns.      |
 | `statement`  | Big bold statement, logo only — no cheetah/spots.         |
@@ -21,7 +21,8 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `end`        | Closing slide. "Danke." by default.                       |
 | `intro`      | Plain vertically-centered slot. No branding chrome.       |
 
-`cover`, `section`, and `contact` render the cheetah image and corner spots.
+`cover`, `section`, and `contact` render the cheetah sujet and corner spots —
+all three share the master's single background placement.
 `default`, `two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
 unstyled centered container — handy for full-bleed custom content.
 
@@ -55,7 +56,8 @@ theme: '@gepardec/slidev-theme-gepardec'
 
 The official Gepardec assets are bundled inside the theme at `assets/`:
 
-- `assets/cheetah.jpg` — cover/section image
+- `assets/cheetah-sujet.webp` — cheetah sujet for `cover`, `section` and
+  `contact` (transparent PNG source, exported as WebP with its alpha intact)
 - `assets/logo.png` — footer wordmark
 - `assets/spots.png` — corner decoration
 
@@ -79,6 +81,13 @@ image: /my-custom-cover.jpg
 
 ### Title slide
 
+Mirrors the corporate PowerPoint title slide: the cheetah sujet bleeds off the
+left edge — its centre line sits on the slide edge, so the right half of the
+face shows — and the artwork's own alpha falloff dissolves it into the black
+canvas. The title column starts at ~34% width. The first heading is the
+*Titel*, the second the *Untertitel*, and any paragraphs after them are pushed
+to the bottom-left as the *Name / Datum* block.
+
 ```md
 ---
 layout: cover
@@ -86,10 +95,15 @@ layout: cover
 
 # Java Enterprise<br/>Modernization
 
-## Quarkus, Jakarta EE, OpenShift
+## Quarkus & Jakarta EE
+
+Oliver Tod
 
 March 2026
 ```
+
+Titles are set at the master's size (~5.7rem), so break long titles with
+`<br/>` — the layout compresses its top spacing before it overflows.
 
 ### Section break
 
@@ -158,7 +172,7 @@ layout: statement
 
 ### Contact slide
 
-A one-to-one rebuild of the Gepardec "Kontakt" slide: cheetah image on the left,
+A one-to-one rebuild of the Gepardec "Kontakt" slide: cheetah sujet on the left,
 white uppercase headline, the person upright against the italic body copy, the
 office block with yellow `//` markers, `WEB` / `MAIL` / `TEL` rows and the social
 spots. Everything except the person is already filled in:

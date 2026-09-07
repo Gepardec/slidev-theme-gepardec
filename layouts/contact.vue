@@ -2,7 +2,7 @@
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
 import SocialLinks from '../components/SocialLinks.vue'
-import defaultCheetah from '../assets/cheetah.jpg'
+import defaultCheetah from '../assets/cheetah-sujet.webp'
 
 const props = withDefaults(
   defineProps<{
@@ -51,9 +51,13 @@ const segments = (path: string) =>
 
 <template>
   <div class="gepardec-contact slidev-layout">
-    <div
+    <!-- Same sujet placement as cover/section — the Kontakt slide shares the
+         title slide's background in the master. -->
+    <img
       class="contact-image"
-      :style="{ backgroundImage: `url(${image ?? defaultCheetah})` }"
+      :src="image ?? defaultCheetah"
+      alt=""
+      aria-hidden="true"
     />
 
     <div class="contact-content">
@@ -129,26 +133,29 @@ const segments = (path: string) =>
 
   padding: 0;
   height: 100%;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  align-items: stretch;
+  position: relative;
+  background-color: var(--gepardec-black);
 }
 
 .contact-image {
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  background-size: cover;
-  background-position: right center;
+  position: absolute;
+  left: -30.25%;
+  top: 4%;
+  width: 60.4%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .contact-content {
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   /* The reference slide is bottom-anchored, not centred. */
   justify-content: flex-end;
-  padding: 2rem 3rem 1.9rem 2.05rem;
+  padding: 2rem 3rem 1.9rem 33.44%;
   z-index: 3;
   min-width: 0;
 }
