@@ -140,6 +140,14 @@ layout: statement
 # We only recommend<br/>**what we can technically justify.**
 
 ---
+layout: contact
+name: Günter Pirklbauer
+role: CEO
+email: guenter.pirklbauer@gepardec.com
+phone: +43 664 1167 681
+---
+
+---
 layout: end
 ---
 
