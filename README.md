@@ -17,11 +17,12 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
 | `two-cols`   | Side-by-side content with a title above two columns.      |
 | `statement`  | Big bold statement, logo only — no cheetah/spots.         |
+| `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
 | `end`        | Closing slide. "Danke." by default.                       |
 | `intro`      | Plain vertically-centered slot. No branding chrome.       |
 
-`cover` and `section` render the cheetah image and corner spots. `default`,
-`two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
+`cover`, `section`, and `contact` render the cheetah image and corner spots.
+`default`, `two-cols`, `statement`, and `end` show the footer logo only. `intro` is an
 unstyled centered container — handy for full-bleed custom content.
 
 ## Install
@@ -153,6 +154,97 @@ layout: statement
 ---
 
 # We only recommend<br/>**what we can technically justify.**
+```
+
+### Contact slide
+
+A one-to-one rebuild of the Gepardec "Kontakt" slide: cheetah image on the left,
+white uppercase headline, the person upright against the italic body copy, the
+office block with yellow `//` markers, `WEB` / `MAIL` / `TEL` rows and the social
+spots. Everything except the person is already filled in:
+
+```md
+---
+layout: contact
+name: Günter Pirklbauer
+role: CEO
+photo: /contact.jpg
+email: guenter.pirklbauer@gepardec.com
+phone: +43 664 1167 681
+---
+```
+
+| Prop         | Default                                            |
+|--------------|----------------------------------------------------|
+| `name`       | —                                                  |
+| `role`       | —                                                  |
+| `photo`      | — (placeholder box, see below)                     |
+| `photoPath`  | `public/contact.jpg` — the path the placeholder shows |
+| `company`    | `Gepardec IT Services GmbH`                        |
+| `locations`  | Wien + Linz office addresses                       |
+| `web`        | `www.gepardec.com`                                 |
+| `email`      | —                                                  |
+| `phone`      | —                                                  |
+| `image`      | bundled cheetah asset                              |
+| `social`     | `true` — set `false` to drop the badge row         |
+
+`web`, `email`, and `phone` become `https:` / `mailto:` / `tel:` links.
+
+#### The portrait
+
+Drop the headshot into your deck's `public/` directory and point `photo` at it
+with a leading slash — `public/contact.jpg` is referenced as `photo: /contact.jpg`.
+A 3:4 portrait crop matches the reference slide.
+
+Until then the slide renders a dashed placeholder in the portrait's place naming
+the file it expects, so an unfinished deck says so out loud instead of showing a
+silent gap. Use a different location by setting `photoPath`:
+
+```md
+---
+layout: contact
+photoPath: public/team/alice.jpg
+---
+```
+
+#### Social badges
+
+The four badges render unlinked by default, exactly like the printed original.
+Pass a URL to turn one into a real link:
+
+```md
+---
+layout: contact
+linkedin: https://www.linkedin.com/company/gepardec
+xing: https://www.xing.com/pages/gepardec
+---
+```
+
+#### Offices and headline
+
+`locations` replaces the two default office rows, and the `::title::` slot
+replaces the headline (which is uppercased by the layout):
+
+```md
+---
+layout: contact
+locations:
+  - { label: 'Graz', address: 'Beispielweg 1, 8010 Graz' }
+---
+
+::title::
+
+# Get in touch
+```
+
+The headline and name are white on the reference slide. To put the brand yellow
+back on them, override the two theme tokens in your deck's `style.css`:
+
+```css
+:root {
+  --gepardec-contact-title-color: var(--gepardec-yellow);
+  --gepardec-contact-name-color:  var(--gepardec-yellow);
+}
 ```
 
 ### End slide

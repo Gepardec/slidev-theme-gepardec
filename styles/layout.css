@@ -19,6 +19,11 @@
   --slidev-code-background:  #111111;
   --slidev-code-foreground:  #e6e6e6;
 
+  /* Contact layout ------------------------------------------------------- */
+  /* The reference Kontakt slide sets these white; override for brand yellow. */
+  --gepardec-contact-title-color: var(--gepardec-white);
+  --gepardec-contact-name-color:  var(--gepardec-white);
+
   /* Typography ----------------------------------------------------------- */
   --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
   --gepardec-font-body:    'Barlow Semi Condensed', system-ui, sans-serif;
