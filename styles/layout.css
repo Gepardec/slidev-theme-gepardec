@@ -19,10 +19,20 @@
   --slidev-code-background:  #111111;
   --slidev-code-foreground:  #e6e6e6;
 
-  /* Contact layout ------------------------------------------------------- */
-  /* The reference Kontakt slide sets these white; override for brand yellow. */
-  --gepardec-contact-title-color: var(--gepardec-white);
-  --gepardec-contact-name-color:  var(--gepardec-white);
+  /* Slide geometry -------------------------------------------------------- */
+  /* The master's margins, measured on its 1280x720 canvas and scaled to
+     Slidev's 980 px one. Every layout lays its content out against these. */
+  --gepardec-margin-x:      5.827%;
+  --gepardec-margin-top:    3.331rem;
+  /* Clears the footer logo, whose top edge sits ~14% above the slide bottom. */
+  --gepardec-margin-bottom: 4.5rem;
+  /* PowerPoint's text inset — the gap between a text box's edge and its glyphs.
+     The layouts rebuilt 1:1 from the master align their markers to it. */
+  --gepardec-text-inset:    0.431rem;
+
+  /* The master sets content headlines in caps. Set this to `none` in your deck
+     to keep headlines as written. */
+  --gepardec-headline-transform: uppercase;
 
   /* Typography ----------------------------------------------------------- */
   --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
@@ -41,7 +51,10 @@
   font-weight: 400;
   font-size: 1.05rem;
   line-height: 1.5;
-  padding: 2.5rem 3rem;
+  /* The master's margins. Layouts that place their own content box override
+     this; the rest — and Slidev's built-in layouts — inherit it. */
+  padding: var(--gepardec-margin-top) var(--gepardec-margin-x) var(--gepardec-margin-bottom);
+  height: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -63,6 +76,26 @@
 .slidev-layout h3 { font-size: 1.5rem; line-height: 1.2; color: var(--gepardec-white); }
 .slidev-layout h4 { font-size: 1.2rem; line-height: 1.25; color: var(--gepardec-white); }
 
+/* Master content headline — the uppercase yellow headline the corporate master
+   puts on its content slides. Layouts opt in with `gepardec-headline` on their
+   root; `cover`, `section` and `statement` carry their own headline instead. */
+.gepardec-headline h1 {
+  font-size: 3.445rem;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: var(--gepardec-headline-transform);
+  color: var(--gepardec-yellow);
+  margin: 0;
+}
+
+/* Content sits above the chrome: the spots (z-index 1) and the logo (z-index 2)
+   come after it in the DOM, so an unpositioned content box would paint below
+   them. Every layout's content box carries this. */
+.gepardec-content {
+  position: relative;
+  z-index: 3;
+}
+
 .slidev-layout p,
 .slidev-layout li {
   color: var(--gepardec-white);
@@ -71,14 +104,14 @@
 .slidev-layout p {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  line-height: 1.5rem;
+  /* Unitless, so it scales with a layout's own font-size. */
+  line-height: 1.5;
 }
 
 /* Lead paragraph — first <p> immediately after a heading */
 .slidev-layout h1 + p,
 .slidev-layout h2 + p {
   font-size: 1.25rem;
-  font-weight: 500;
   color: var(--gepardec-gray-text);
   margin-top: 0.6rem;
   margin-bottom: 1rem;
@@ -128,6 +161,24 @@
   color: var(--gepardec-yellow);
   font-weight: 600;
   border-bottom-color: var(--gepardec-yellow);
+}
+
+/* ------------------------------------------------------------------------
+   Cheetah sujet — the master's single background, shared by the layouts that
+   carry it (cover / section / contact)
+   ------------------------------------------------------------------------ */
+.gepardec-sujet {
+  position: absolute;
+  /* Measured off the corporate title slide: the sujet is scaled to ~97% of the
+     slide height and pushed left until the muzzle centre line sits on the slide
+     edge, leaving the right eye at ~10% width. */
+  left: -30.25%;
+  top: 4%;
+  width: 60.4%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* ------------------------------------------------------------------------

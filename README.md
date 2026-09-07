@@ -20,14 +20,21 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `two-cols`   | Side-by-side content with a title above two columns.      |
 | `statement`  | Big bold statement — no cheetah.                          |
 | `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
-| `end`        | Closing slide. "Danke." by default.                       |
-| `intro`      | Plain vertically-centered slot. No branding chrome.       |
 
 Every layout carries the footer logo and the corner spots, as the corporate
 master does. `cover`, `section`, and `contact` add the cheetah sujet — all three
-share the master's single background placement. `intro` is the one exception: an
-unstyled centered container with no branding chrome — handy for full-bleed
-custom content.
+share the master's single background placement, from one `CheetahSujet`
+component.
+
+Every layout takes its headline from the markdown flow — the first heading on
+the slide, before any `::slot::` marker. `default`, `two-cols`, `agenda`,
+`quadrants` and `contact` render it as the master's content headline: uppercase,
+3.445rem, weight 400. `cover` and `section` set their far larger *Titel*
+instead — uppercase too on `cover`, as the master has it — and `statement` sets
+a sentence, upright in white.
+
+Close a deck with `contact`, or with `statement` when there is no person to put
+on it.
 
 ## Install
 
@@ -64,8 +71,9 @@ The official Gepardec assets are bundled inside the theme at `assets/`:
 - `assets/logo.png` — footer wordmark
 - `assets/spots.png` — corner decoration
 
-They are imported by the Vue components and resolved through Vite's asset
-pipeline, so they work transparently no matter where your slide deck lives.
+They are imported by the Vue components (`CheetahSujet`, `GepardecLogo`,
+`CornerSpots`) and resolved through Vite's asset pipeline, so they work
+transparently no matter where your slide deck lives.
 To swap any of them, replace the file and rebuild.
 
 ### Overriding the cover image per slide
@@ -88,8 +96,9 @@ Mirrors the corporate PowerPoint title slide: the cheetah sujet bleeds off the
 left edge — its centre line sits on the slide edge, so the right half of the
 face shows — and the artwork's own alpha falloff dissolves it into the black
 canvas. The title column starts at ~34% width. The first heading is the
-*Titel*, the second the *Untertitel*, and any paragraphs after them are pushed
-to the bottom-left as the *Name / Datum* block.
+*Titel*, the second the *Untertitel* — both uppercased by the layout, as in the
+master — and any paragraphs after them are pushed to the bottom-left as the
+*Name / Datum* block.
 
 ```md
 ---
@@ -105,8 +114,9 @@ Oliver Tod
 March 2026
 ```
 
-Titles are set at the master's size (~5.7rem), so break long titles with
-`<br/>` — the layout compresses its top spacing before it overflows.
+Titles are set at the master's size (~5.7rem) and in caps, which is wider than
+it reads in the editor — break long titles with `<br/>`, and the layout
+compresses its top spacing before it overflows.
 
 ### Section break
 
@@ -214,9 +224,8 @@ CI/CD with automated rollback, Renovate keeping dependencies current.
 OpenShift as the target platform, observability in place first.
 ```
 
-The headline can sit in the default slot (as above) or in an explicit
-`::title::` slot, like `two-cols`. Blocks fill the raster in order — supply
-only `::one::` and `::two::` and you get the top row.
+The headline is whatever precedes `::one::`. Blocks fill the raster in order —
+supply only `::one::` and `::two::` and you get the top row.
 
 Inside a block, paragraphs run at the master's uniform line pitch with no gap
 between them, exactly as in the reference slide. Use a second block or a `//`
@@ -224,12 +233,12 @@ list when copy needs to be set apart.
 
 ### Two columns
 
+The headline is whatever precedes `::left::`:
+
 ```md
 ---
 layout: two-cols
 ---
-
-::title::
 
 # Tech stack comparison
 
@@ -324,8 +333,9 @@ xing: https://www.xing.com/pages/gepardec
 
 #### Offices and headline
 
-`locations` replaces the two default office rows, and the `::title::` slot
-replaces the headline (which is uppercased by the layout):
+`locations` replaces the two default office rows, and a heading replaces the
+default `Kontakt` headline (which is uppercased, like every content headline).
+A `::note::` slot adds a free-form line under the social badges:
 
 ```md
 ---
@@ -334,30 +344,15 @@ locations:
   - { label: 'Graz', address: 'Beispielweg 1, 8010 Graz' }
 ---
 
-::title::
-
 # Get in touch
+
+::note::
+
+Reach us any weekday before 18:00.
 ```
 
-The headline and name are white on the reference slide. To put the brand yellow
-back on them, override the two theme tokens in your deck's `style.css`:
-
-```css
-:root {
-  --gepardec-contact-title-color: var(--gepardec-yellow);
-  --gepardec-contact-name-color:  var(--gepardec-yellow);
-}
-```
-
-### End slide
-
-```md
----
-layout: end
----
-
-# Danke.
-```
+The headline and the person are white here, not yellow — that is the reference
+slide, not an oversight.
 
 ## Styled Markdown elements
 
@@ -390,7 +385,13 @@ All theme colors and fonts are CSS variables defined in `styles/layout.css`:
 }
 ```
 
-Override them in a project-level `style.css`.
+Override them in a project-level `style.css`. Two of them shape the layouts
+rather than the palette:
+
+| Variable                        | Default    | Effect                                              |
+|---------------------------------|------------|-----------------------------------------------------|
+| `--gepardec-headline-transform` | `uppercase`| Set to `none` to keep every headline as written.      |
+| `--gepardec-margin-x`           | `5.827%`   | The master's side margin — every layout aligns to it.|
 
 ### UnoCSS color scale
 

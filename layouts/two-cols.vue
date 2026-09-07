@@ -4,18 +4,19 @@ import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
-  <div class="gepardec-two-cols slidev-layout">
-    <div class="title-area">
-      <slot name="title" />
+  <div class="gepardec-two-cols gepardec-headline slidev-layout">
+    <!-- Headline comes from the markdown flow, as in every other layout:
+         whatever precedes the first `::left::` marker. -->
+    <div class="title-area gepardec-content">
+      <slot />
     </div>
 
-    <div class="cols">
+    <div class="cols gepardec-content">
       <div class="col col-left">
         <slot name="left" />
       </div>
       <div class="col col-right">
         <slot name="right" />
-        <slot />
       </div>
     </div>
 
@@ -28,19 +29,7 @@ import CornerSpots from '../components/CornerSpots.vue'
 .gepardec-two-cols {
   display: flex;
   flex-direction: column;
-  padding: 3.5rem 4.5rem 4.5rem 4.5rem;
   gap: 1.4rem;
-  height: 100%;
-  overflow: hidden;
-}
-
-.title-area {
-  z-index: 3;
-}
-
-.title-area :deep(h1),
-.title-area :deep(h2) {
-  margin: 0;
 }
 
 .cols {
@@ -49,11 +38,9 @@ import CornerSpots from '../components/CornerSpots.vue'
   gap: 3rem;
   flex: 1;
   min-height: 0;
-  z-index: 3;
 }
 
 .col {
   min-width: 0;
-  overflow: auto;
 }
 </style>

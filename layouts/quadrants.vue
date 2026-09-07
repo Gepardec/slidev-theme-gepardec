@@ -4,15 +4,14 @@ import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
-  <div class="gepardec-quadrants slidev-layout">
-    <div class="quadrants-content">
+  <div class="gepardec-quadrants gepardec-headline slidev-layout">
+    <div class="quadrants-content gepardec-content">
       <!--
         Slot flow mirrors the corporate "Subheadings" slide:
-        the headline goes in the default slot (or `::title::`), and each of the
-        four text blocks gets a named slot, filled in reading order.
+        the headline comes from the markdown flow and each of the four text
+        blocks gets a named slot, filled in reading order.
       -->
       <div class="quadrants-title">
-        <slot name="title" />
         <slot />
       </div>
 
@@ -39,9 +38,6 @@ import CornerSpots from '../components/CornerSpots.vue'
    text width with no gutter between them, and the PowerPoint text inset doing
    the visual separating. Nothing is drawn — the boxes only place the text. */
 .gepardec-quadrants {
-  /* PowerPoint's text inset. The headline shares it so its glyphs line up with
-     the "//" markers below. */
-  --quadrant-inset: 0.431rem;
   /* Master box height (203.15 px) and the space between the two rows. */
   --quadrant-row-height: 9.721rem;
   --quadrant-row-gap: 1.652rem;
@@ -51,36 +47,25 @@ import CornerSpots from '../components/CornerSpots.vue'
      baseline lands on the master's (34.344 px below the box top). */
   --quadrant-head-offset: 0.297rem;
 
-  padding: 0;
-  height: 100%;
-  position: relative;
-  background-color: var(--gepardec-black);
+  /* The master's side margins are the theme's; only the bottom differs — the
+     block raster runs to the slide edge. */
+  padding-bottom: 0;
 }
 
 .quadrants-content {
-  position: relative;
-  z-index: 3;
   height: 100%;
-  /* The master's side margins: 5.827% of the slide width, left and right. */
-  padding: 3.331rem 5.827% 0;
 }
 
 /* --- Headline ------------------------------------------------------------ */
-/* Same treatment as the `agenda` layout: the two masters put their headline
-   box a few pixels apart, and a headline that jumps between layouts reads
-   worse than the difference is worth. */
+/* Treatment comes from `gepardec-headline` — the master puts this slide's
+   headline box a few pixels off the agenda's, and a headline that jumps
+   between layouts reads worse than the difference is worth. */
 .quadrants-title {
   margin: 0 0 var(--quadrant-title-gap);
 }
 
 .quadrants-title :deep(h1) {
-  font-size: 3.445rem;
-  line-height: 1;
-  font-weight: 400;
-  /* The master sets the headline in caps. */
-  text-transform: uppercase;
-  color: var(--gepardec-yellow);
-  margin: 0 0 0 var(--quadrant-inset);
+  margin: 0 0 0 var(--gepardec-text-inset);
 }
 
 /* --- Blocks -------------------------------------------------------------- */
@@ -97,7 +82,7 @@ import CornerSpots from '../components/CornerSpots.vue'
 
 .quadrant {
   min-width: 0;
-  padding: var(--quadrant-head-offset) var(--quadrant-inset) 0;
+  padding: var(--quadrant-head-offset) var(--gepardec-text-inset) 0;
 }
 
 /* Subheading — "// " is the layout's, so the author writes plain text. */

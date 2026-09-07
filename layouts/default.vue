@@ -4,8 +4,8 @@ import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
-  <div class="gepardec-default slidev-layout">
-    <div class="content">
+  <div class="gepardec-default gepardec-headline slidev-layout">
+    <div class="content gepardec-content">
       <slot />
     </div>
 
@@ -15,19 +15,9 @@ import CornerSpots from '../components/CornerSpots.vue'
 </template>
 
 <style scoped>
-.gepardec-default {
-  padding: 3.5rem 4.5rem 4.5rem 4.5rem;
-  height: 100%;
-  overflow: hidden;
-}
-
-.content {
-  position: relative;
-  z-index: 3;
-  /* Title and content sit naturally - no borders, no boxes.
-     The first heading becomes the title, the rest is content. */
-}
-
+/* Content slide: the master's margins come from the global `.slidev-layout`
+   box and the headline from `gepardec-headline`, so all this layout adds is
+   the gap under the title. */
 .content :deep(> h1:first-child),
 .content :deep(> h2:first-child) {
   margin-bottom: 1.4rem;

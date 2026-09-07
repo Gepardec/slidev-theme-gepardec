@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
-import defaultCheetah from '../assets/cheetah-sujet.webp'
+import CheetahSujet from '../components/CheetahSujet.vue'
 
 defineProps<{
   /**
@@ -15,21 +15,14 @@ defineProps<{
 
 <template>
   <div class="gepardec-cover slidev-layout">
-    <!-- Cheetah sujet: the face's centre line sits on the left slide edge and
-         the artwork's own alpha falloff dissolves it into the black canvas. -->
-    <img
-      class="cover-image"
-      :src="image ?? defaultCheetah"
-      alt=""
-      aria-hidden="true"
-    />
+    <CheetahSujet :image="image" />
 
     <!--
       Slot flow mirrors the corporate title slide:
       h1 = Titel, h2 = Untertitel, any following paragraphs = Name / Datum,
       which are pushed down to the bottom-left meta position.
     -->
-    <div class="cover-content">
+    <div class="cover-content gepardec-content">
       <slot />
     </div>
 
@@ -44,33 +37,14 @@ defineProps<{
    meta lines sitting ~7% above the bottom edge. */
 .gepardec-cover {
   padding: 0;
-  height: 100%;
-  position: relative;
-  background-color: var(--gepardec-black);
-}
-
-.cover-image {
-  position: absolute;
-  /* Placement measured off the corporate title slide: the sujet is scaled to
-     ~97% of the slide height and pushed left until the muzzle centre line sits
-     on the slide edge, leaving the right eye at ~10% width. */
-  left: -30.25%;
-  top: 4%;
-  width: 60.4%;
-  height: auto;
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
 }
 
 .cover-content {
-  position: relative;
-  z-index: 3;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 8% 1.99rem 33.44%;
+  padding: 0 var(--gepardec-margin-x) 1.99rem 33.44%;
 }
 
 /* Vertical spacer — puts the title baseline at 44.7% of the slide height, as in
@@ -81,17 +55,23 @@ defineProps<{
   flex: 0 1 31.54%;
 }
 
+/* Not the master content headline — the title slide sets its Titel far larger.
+   The case follows the same token, so a deck that opts out of caps opts out
+   here too. */
 .cover-content :deep(h1) {
   font-size: 5.742rem;
   line-height: 1;
+  text-transform: var(--gepardec-headline-transform);
   color: var(--gepardec-yellow);
   font-weight: 400;
   margin: 0;
 }
 
+/* The master sets the Untertitel in caps as well. */
 .cover-content :deep(h2) {
   font-size: 3.19rem;
   line-height: 1.1;
+  text-transform: var(--gepardec-headline-transform);
   color: var(--gepardec-white);
   font-weight: 400;
   margin: 3.26rem 0 0;

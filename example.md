@@ -109,8 +109,6 @@ in place before the first workload moves.
 layout: two-cols
 ---
 
-::title::
-
 # Tech stack comparison
 
 ::left::
@@ -190,9 +188,3 @@ role: CEO
 email: guenter.pirklbauer@gepardec.com
 phone: +43 664 1167 681
 ---
-
----
-layout: end
----
-
-# Danke.

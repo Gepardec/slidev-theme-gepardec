@@ -4,13 +4,13 @@ import CornerSpots from '../components/CornerSpots.vue'
 </script>
 
 <template>
-  <div class="gepardec-agenda slidev-layout">
+  <div class="gepardec-agenda gepardec-headline slidev-layout">
     <!--
       Slot flow mirrors the corporate Agenda slide:
       h1 = the headline, the following list = the agenda entries.
       Both bullet lists and ordered lists render as "// n" rows.
     -->
-    <div class="agenda-content">
+    <div class="agenda-content gepardec-content">
       <slot />
     </div>
 
@@ -31,35 +31,23 @@ import CornerSpots from '../components/CornerSpots.vue'
 .gepardec-agenda {
   /* Entry's left edge to the start of its text — 95.75 px in the master. */
   --agenda-number-width: 4.581rem;
-  /* PowerPoint's text inset. The headline shares it so its glyphs line up with
-     the "//" markers below. */
-  --agenda-text-inset: 0.431rem;
   /* The master's row pitch. */
   --agenda-row-height: 2.928rem;
 
-  padding: 0;
-  height: 100%;
-  position: relative;
-  background-color: var(--gepardec-black);
+  /* The master's side margins are the theme's; only the bottom differs — the
+     entry table runs to the slide edge. */
+  padding-bottom: 0;
 }
 
 .agenda-content {
-  position: relative;
-  z-index: 3;
   height: 100%;
-  /* The master's side margins: 5.83% of the slide width. */
-  padding: 3.331rem 5.827% 0;
 }
 
 /* --- Headline ------------------------------------------------------------ */
+/* Treatment comes from `gepardec-headline`; the master's gap below it and the
+   text inset that lines its glyphs up with the "//" markers are this slide's. */
 .agenda-content :deep(h1) {
-  font-size: 3.445rem;
-  line-height: 1;
-  font-weight: 400;
-  /* The master sets the headline in caps. */
-  text-transform: uppercase;
-  color: var(--gepardec-yellow);
-  margin: 0 0 3.394rem var(--agenda-text-inset);
+  margin: 0 0 3.394rem var(--gepardec-text-inset);
 }
 
 /* --- Entries ------------------------------------------------------------- */
@@ -90,12 +78,12 @@ import CornerSpots from '../components/CornerSpots.vue'
 .agenda-content :deep(li) {
   display: grid;
   grid-template-columns: var(--agenda-number-width) 1fr;
-  column-gap: var(--agenda-text-inset);
+  column-gap: var(--gepardec-text-inset);
   align-items: center;
   margin: 0;
   /* The master's text inset on the closing edge too, so a wrapped entry stops
      short of the next half instead of running into it. */
-  padding: 0 var(--agenda-text-inset) 0 0;
+  padding: 0 var(--gepardec-text-inset) 0 0;
   font-size: 1.978rem;
   font-style: italic;
   font-weight: 400;
@@ -109,7 +97,7 @@ import CornerSpots from '../components/CornerSpots.vue'
   /* bullets.css pins its marker into the text's left padding; here the marker
      is a column of its own. */
   position: static;
-  padding-left: var(--agenda-text-inset);
+  padding-left: var(--gepardec-text-inset);
   color: var(--gepardec-yellow);
   font-family: var(--gepardec-font-display);
   font-style: italic;
