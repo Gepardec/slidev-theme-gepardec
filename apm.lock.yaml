@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-09-07T13:59:09.404364+00:00'
+generated_at: '2026-09-08T15:28:05.297833+00:00'
 apm_version: 0.29.0
 dependencies:
 - repo_url: anthropics/skills
@@ -173,6 +173,42 @@ dependencies:
     .claude/skills/slidev/references/tool-mcp.md: sha256:00aabc8ba38e0376ee5aad8b511e723b9e67fc567cb4899c00e441650ad44ab8
   content_hash: sha256:c151d2dee2b4caab569071c58893926728fbba7c71e3f9050ac4553fcd8a345e
 deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/gepardec-slidev-theme-dev
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/gepardec-slidev-theme-dev/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:9ad1be54c910c87a9376c5f239d4ce1a7548bc2c40ec838a4a2d69542749a8cf
+- kind: project-relative
+  target: claude
+  value: .claude/skills/gepardec-slidev-theme-dev/references/surfaces.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:abed7d095cda37fc294838e5be2f95b44818e265636bfee3ce288470c437e746
+- kind: project-relative
+  target: claude
+  value: .claude/skills/gepardec-slidev-theme-dev/references/verifying.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:e9a7b8b6856bf33fbf672e6803ab992854aebbcc4b1a64d5e450ee0410632078
 - kind: project-relative
   target: claude
   value: .claude/skills/skill-creator
@@ -848,3 +884,12 @@ deployments:
   - slidevjs/slidev/skills/slidev
   active_owner: slidevjs/slidev/skills/slidev
   content_hash: sha256:00aabc8ba38e0376ee5aad8b511e723b9e67fc567cb4899c00e441650ad44ab8
+local_deployed_files:
+- .claude/skills/gepardec-slidev-theme-dev
+- .claude/skills/gepardec-slidev-theme-dev/SKILL.md
+- .claude/skills/gepardec-slidev-theme-dev/references/surfaces.md
+- .claude/skills/gepardec-slidev-theme-dev/references/verifying.md
+local_deployed_file_hashes:
+  .claude/skills/gepardec-slidev-theme-dev/SKILL.md: sha256:9ad1be54c910c87a9376c5f239d4ce1a7548bc2c40ec838a4a2d69542749a8cf
+  .claude/skills/gepardec-slidev-theme-dev/references/surfaces.md: sha256:abed7d095cda37fc294838e5be2f95b44818e265636bfee3ce288470c437e746
+  .claude/skills/gepardec-slidev-theme-dev/references/verifying.md: sha256:e9a7b8b6856bf33fbf672e6803ab992854aebbcc4b1a64d5e450ee0410632078

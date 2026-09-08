@@ -37,7 +37,8 @@
     "screenshot": "slidev export example.md --format png",
     "dev:gallery": "slidev gallery.md --open",
     "build:gallery": "slidev build gallery.md",
-    "screenshot:gallery": "slidev export gallery.md --format png"
+    "screenshot:gallery": "slidev export gallery.md --format png",
+    "check:surfaces": "node scripts/check-surfaces.mjs"
   },
   "dependencies": {
     "@slidev/types": "^52.16.0"
