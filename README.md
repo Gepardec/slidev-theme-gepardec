@@ -53,6 +53,22 @@ theme: ./slidev-theme-gepardec
 
 The bundled `example.md` uses `theme: ./` because it lives in the theme root.
 
+### The two decks
+
+| Deck          | What it is                                              | Scripts |
+|---------------|---------------------------------------------------------|---------|
+| `example.md`  | A realistic customer deck. Ships in the npm package — copy it and replace the content. | `dev`, `build`, `export`, `screenshot` |
+| `gallery.md`  | Every layout rendering itself and its own rules, including the slots and props `example.md` has no reason to use. Not published. | `dev:gallery`, `build:gallery`, `screenshot:gallery` |
+
+```bash
+pnpm dev          # the example deck
+pnpm dev:gallery  # the layout gallery
+```
+
+Change a layout's geometry and run the gallery — it puts every slot, variant
+and prop of the theme on screen in nineteen slides, so an overflow or a broken
+slot shows up immediately.
+
 ### As an npm package
 
 ```bash
@@ -182,6 +198,10 @@ the split happens.
 
 Twelve is where the master stops. Past that a third column would start off the
 right edge of the slide, so split a longer agenda over two slides.
+
+Entries need to be terser in two-column mode than in one: each half is only
+~27rem wide, so an entry runs to a second line at around 30 characters. One or
+two wrapped entries fit; a column of them overflows the slide.
 
 A wordy entry wraps rather than being clipped, and deepens its row — in two
 column mode both halves share their row tracks, so the entry opposite it moves

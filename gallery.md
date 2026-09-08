@@ -1,0 +1,357 @@
+---
+theme: ./
+title: Gepardec Theme — Layout Gallery
+info: |
+  Every layout in slidev-theme-gepardec, rendering itself and its own rules.
+  The README is the canonical reference; this deck is what those rules look like.
+drawings:
+  persist: false
+layout: cover
+---
+
+# Layout gallery
+
+## Every layout, every slot
+
+slidev-theme-gepardec
+
+Rendered from the theme source
+
+---
+layout: default
+---
+
+# Cover
+
+Each layout in this deck renders itself. Where a layout has no room for prose — `cover`, `section`, `contact` — the slide after it carries the source.
+
+```md
+---
+layout: cover
+---
+
+# Layout gallery
+
+## Every layout, every slot
+
+slidev-theme-gepardec
+```
+
+- The first heading is the *Titel*, the second the *Untertitel* — both uppercased by the layout
+- Every paragraph after them drops to the bottom-left *Name / Datum* block
+- The cheetah bleeds off the left edge; the title column starts at ~34%
+
+---
+layout: agenda
+---
+
+# Agenda
+
+- Cover and section
+- Agenda
+- Quadrants
+- Default content
+- Two columns
+- Two columns with a headline
+- Statement
+- Contact
+- The rules, on every slide that has room
+
+---
+layout: default
+---
+
+# Agenda
+
+Nine entries, so the slide before this one already split: `// 1` to `// 6` down the left, the rest down the right.
+
+```md
+---
+layout: agenda
+---
+
+# Agenda
+
+- Cover and section
+- Agenda
+- Quadrants
+```
+
+- Six entries is what the master fits in one column
+- Bullet lists and ordered lists render identically — the number is the position
+- Twelve is the maximum, but each half is only ~27rem wide — keep split entries terse
+
+---
+layout: agenda
+---
+
+# Twelve entries
+
+- Six fill the left column
+- Seven starts the right
+- Numbers follow position
+- Reordering renumbers
+- Bullets or ordered alike
+- Nothing to configure
+- Twelve is the maximum
+- A long entry wraps and deepens its row
+- Both halves share tracks
+- So the one opposite follows
+- As a table row behaves
+- Split longer agendas
+
+---
+layout: section
+---
+
+# Section
+
+## variant: cheetah
+
+---
+layout: section
+variant: ascii
+---
+
+# Section
+
+## variant: ascii
+
+---
+layout: default
+---
+
+# Section
+
+The divider shares the title slide's background. `variant` picks which of the two official renderings it carries.
+
+```md
+---
+layout: section
+variant: ascii
+---
+
+# Section
+
+## variant: ascii
+```
+
+- `cheetah` is the default; `ascii` is the same face, cropped flush to the left edge
+- There is no third value — the sujet is brand artwork, not a per-slide choice
+- The heading is centred vertically and set at the *Titel* size, not the content headline
+
+---
+layout: default
+---
+
+# Default
+
+The standard content slide. The first heading is the headline; everything after it flows as ordinary Markdown.
+
+- Bullets take the yellow `//` marker
+  - Nested bullets step down a size and dim their marker
+- **Bold** carries the brand yellow, *italic* stays white
+- A [link](https://www.gepardec.com) is yellow with a dim underline
+- `inline code` is set in JetBrains Mono
+
+---
+layout: default
+---
+
+# Ordered lists and tables
+
+1. Ordered lists keep their numbers, tinted yellow
+2. The marker is italic, like the entry
+3. Use them where sequence carries meaning
+
+| Element    | Treatment                          |
+|------------|------------------------------------|
+| `th`       | Yellow, with a yellow rule under it |
+| `td`       | White, hairline rule                |
+| Blockquote | Yellow bar on the left              |
+
+> A blockquote sets a line apart without a box — the theme draws no bordered
+> content boxes anywhere.
+
+---
+layout: default
+---
+
+# Code
+
+Fenced blocks pick up the theme's Shiki setup. Line-highlight markers focus the audience on what matters:
+
+```java {4-5}
+@ApplicationScoped
+public class OrderService {
+
+  @Inject
+  Event<OrderPlaced> orderEvents;
+}
+```
+
+- Write the range in braces after the language: `java {4-5}`
+- The highlight band spans the full block width
+- Magic-move transitions keep a single border through the animation
+
+---
+layout: quadrants
+---
+
+# Quadrants
+
+::one::
+
+### ::one::
+The headline is whatever precedes the first slot marker. The slashes in front
+of this subheading are the layout's — write the text plain.
+
+::two::
+
+### ::two::
+Blocks fill the 2x2 raster in reading order. Supply only `::one::` and
+`::two::` and you get the top row, nothing else.
+
+::three::
+
+### ::three::
+Paragraphs run at the master's uniform line pitch with no gap between them.
+That is the reference slide, not an oversight.
+
+::four::
+
+### ::four::
+A block that outgrows the master's box deepens its row rather than spilling
+over the one below it.
+
+---
+layout: default
+---
+
+# Quadrants
+
+```md
+---
+layout: quadrants
+---
+
+# Quadrants
+
+::one::
+
+### Architecture
+Strangler boundary around the JSF shell.
+
+::two::
+
+### Security
+Keycloak-backed auth from the first service.
+```
+
+- Four named slots: `::one::` through `::four::`, filled in reading order
+- Any heading level works as the subheading — the layout sets them all alike
+- Use a second block or a `//` list when copy needs to be set apart
+
+---
+layout: two-cols
+---
+
+### two-cols
+
+Everything before `::right::` fills this column. `::left::` is accepted as an
+explicit name for it, exactly as in Slidev's own layout.
+
+- No headline slot spans both columns
+- That is `two-cols-header`, next slide
+
+::right::
+
+### The slot contract
+
+```md
+---
+layout: two-cols
+---
+
+### Legacy
+
+::right::
+
+### Target
+```
+
+---
+layout: two-cols-header
+---
+
+# two-cols-header
+
+::left::
+
+### The headline
+
+The default slot — everything before `::left::` — spans both columns and is set
+as the master's content headline.
+
+::right::
+
+### The columns
+
+`::left::` and `::right::` are the two halves. Both take the same `class` prop
+Slidev's built-in layout passes them.
+
+::bottom::
+
+`::bottom::` is an optional row underneath, anchored to the bottom of the slide. Leave it out and it costs no space.
+
+---
+layout: statement
+---
+
+# Bold text takes the **Gepardec yellow.**
+
+---
+layout: contact
+name: Defaults only
+role: No photo, no socials
+social: false
+---
+
+---
+layout: default
+---
+
+# Contact
+
+Everything except the person is filled in already. The slide before this one sets three props; the one after it sets all of them.
+
+| Prop                                  | Default                     |
+|---------------------------------------|-----------------------------|
+| `name` `role` `photo` `email` `phone` | —                           |
+| `photoPath`                           | `public/contact.jpg`        |
+| `company`                             | `Gepardec IT Services GmbH` |
+| `locations`                           | Wien + Linz                 |
+| `web`                                 | `www.gepardec.com`          |
+| `social`                              | `true` — `false` drops them |
+
+A heading replaces the default `Kontakt`, and `::note::` adds a line under the badges.
+
+---
+layout: contact
+name: Günter Pirklbauer
+role: CEO
+email: guenter.pirklbauer@gepardec.com
+phone: +43 664 1167 681
+linkedin: https://www.linkedin.com/company/gepardec
+xing: https://www.xing.com/pages/gepardec
+locations:
+  - { label: 'Wien', address: 'Ernst-Melchior-Gasse 24, 1020 Wien' }
+  - { label: 'Linz', address: 'Europaplatz 4, 4020 Linz' }
+  - { label: 'Graz', address: 'Beispielweg 1, 8010 Graz' }
+---
+
+# Get in touch
+
+::note::
+
+Badges with a URL become links; the rest stay plain, as in print.

@@ -34,7 +34,10 @@
     "build": "slidev build example.md",
     "dev": "slidev example.md --open",
     "export": "slidev export example.md",
-    "screenshot": "slidev export example.md --format png"
+    "screenshot": "slidev export example.md --format png",
+    "dev:gallery": "slidev gallery.md --open",
+    "build:gallery": "slidev build gallery.md",
+    "screenshot:gallery": "slidev export gallery.md --format png"
   },
   "dependencies": {
     "@slidev/types": "^52.16.0"
