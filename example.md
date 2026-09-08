@@ -175,6 +175,107 @@ public class OrderService {
 Use `@ObservesAsync` on the consumer for true async handling.
 
 ---
+layout: section
+---
+
+# Part 3
+
+## How the migration actually went
+
+---
+layout: conversation
+session: OrderService migration · 8 Sep
+---
+
+# Getting the build green
+
+::turns::
+
+<ChatTurn role="user">
+
+The `order-service` module still won't build after the Jakarta switch. Sort it out — I need a green `mvn verify` before standup.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Reading the reactor first. `order-service` declares the `jakarta.*` BOM in its POM, but three classes still import `javax.persistence`, so the entity manager never resolves at compile time.
+
+</ChatTurn>
+
+<ChatTurn role="tool" meta="grep" v-click>
+
+```
+$ grep -rl "javax\.persistence" order-service/src/main/java
+OrderEntity.java
+OrderLineEntity.java
+OrderRepository.java
+```
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Two ways forward. Hand-edit the three files, or wire the Eclipse Transformer into the build so the other fourteen modules get the same treatment when their turn comes. The transformer costs more today and less every time after.
+
+</ChatTurn>
+
+<ChatTurn role="user" v-click>
+
+Transformer. Don't hand-edit — I am not doing this fifteen more times.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Added `transformer-maven-plugin` to the `process-sources` phase, rewriting `javax.*` to `jakarta.*`. Compilation passes now. The build stops in the test phase instead.
+
+</ChatTurn>
+
+<ChatTurn role="tool" meta="mvn -q verify" v-click>
+
+```
+OrderRepositoryTest » PersistenceException:
+  Unknown schema version [2.2] for persistence.xml
+BUILD FAILURE — Tests run: 41, Failures: 0, Errors: 12
+```
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+`persistence.xml` is still on the 2.2 schema. The transformer rewrites Java sources, not resources, so the descriptor has to move to 3.0 separately — namespace, `xsi:schemaLocation` and the `version` attribute.
+
+</ChatTurn>
+
+<ChatTurn role="user" v-click>
+
+That is the one I forget every single time.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Bumped the descriptor to the Jakarta Persistence 3.0 namespace and schema. Re-running the full verify.
+
+</ChatTurn>
+
+<ChatTurn role="tool" meta="mvn -q verify" v-click>
+
+```
+BUILD SUCCESS
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+```
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Green. One thing left that is yours to decide: `CdiProducers` still imports `javax.annotation.PostConstruct`. The transformer skipped it because it comes in on `provided` scope. It compiles today. It will not survive the next JDK bump.
+
+</ChatTurn>
+
+---
 layout: statement
 ---
 

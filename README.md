@@ -21,6 +21,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `two-cols-header` | Headline spanning two columns, plus optional bottom row. |
 | `statement`  | Big bold statement — no cheetah.                          |
 | `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
+| `conversation` | Agent session as a rolling transcript window, paced with `v-click`. |
 
 Every layout carries the footer logo and the corner spots, as the corporate
 master does. `cover`, `section`, and `contact` add the cheetah sujet — all three
@@ -66,7 +67,7 @@ pnpm dev:gallery  # the layout gallery
 ```
 
 Change a layout's geometry and run the gallery — it puts every slot, variant
-and prop of the theme on screen in nineteen slides, so an overflow or a broken
+and prop of the theme on screen in twenty-one slides, so an overflow or a broken
 slot shows up immediately.
 
 ### As an npm package
@@ -422,6 +423,83 @@ Reach us any weekday before 18:00.
 The headline and the person are white here, not yellow — that is the reference
 slide, not an oversight.
 
+### Walking through an agent session
+
+`conversation` tells the story of a session with an AI agent. The problem it
+solves is that a transcript is taller than a slide, and a scrollbar answers
+that on screen only to crop the content in the PDF.
+
+So the slide is a fixed viewport onto a taller stack of turns. Each click
+reveals the next turn and slides the stack up so that turn sits flush with the
+bottom; history scrolls off the top under a gradient, with a count of what went
+above. Nothing is ever cropped *unseen* — every turn is fully visible at the
+click that introduces it.
+
+````md
+---
+layout: conversation
+session: OrderService migration · 8 Sep
+---
+
+# Getting the build green
+
+::turns::
+
+<ChatTurn role="user">
+
+The `order-service` module still won't build.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Reading the reactor first.
+
+</ChatTurn>
+````
+
+`role` is `user`, `agent` or `tool` and drives the whole treatment — the user
+speaks at the left margin behind a thick yellow rule, the agent is indented
+behind a thin grey one, a tool call is mono on the code ground. `who` overrides
+the role cap (`who="Oliver"`), `meta` adds a muted note beside it
+(`meta="mvn -q verify"`). `session` is the label along the tape's foot.
+
+Message bodies are set upright, against the master's italic: a paragraph of
+transcript at this size is punishing in italic, so the italics stay on the caps
+and headlines. Inline `code` also drops the master's yellow chip inside a turn —
+one sentence of agent output can carry six of them, and six chips is a rash
+rather than an emphasis.
+
+The blank lines inside the tag are load-bearing — they are what makes the body
+parse as Markdown rather than as raw HTML.
+
+Pacing is Slidev's own `v-click`. The layout registers no clicks of its own; it
+reads the classes the directive leaves on the DOM, so one turn per click, two
+per click or a `v-click` range all work. The conversation is the only model —
+there is no second description of it to keep in sync.
+
+#### Exporting
+
+**Export this layout with `--with-clicks`:**
+
+```bash
+slidev export slides.md --with-clicks
+```
+
+Every turn is fully visible at the click that introduces it, and `--with-clicks`
+gives each of those clicks its own PDF page — so a reader flipping through the
+PDF sees the conversation unfold the way the room did. Without the flag the
+exporter renders the final state only, and the PDF shows a single page with the
+history already scrolled off the top.
+
+#### One thing to watch
+
+A turn taller than the whole viewport can never be shown in full: the tape
+scrolls its bottom into view and its top is gone, on screen and in the PDF
+alike. It is the layout's only silent crop, so `slidev dev` outlines such a turn
+and logs how far it overshoots — split it across two `<ChatTurn>` blocks on
+consecutive clicks. The check never runs in a build or an export.
+
 ## Styled Markdown elements
 
 Standard Markdown is themed automatically — no extra components required:
@@ -470,7 +548,16 @@ npm run export     # export to PDF
 npm run screenshot # export each slide to PNG
 ```
 
-Each script targets the bundled `example.md`.
+Each script targets the bundled `example.md`, which exercises every layout —
+including a `conversation` walkthrough of the migration it describes.
+
+`npm run export` needs `playwright-chromium`, which is a dev dependency here.
+It does **not** pass `--with-clicks`, so the conversation slide exports as a
+single final-state page; add the flag when the transcript is the point:
+
+```bash
+npx slidev export example.md --with-clicks
+```
 
 ## License
 

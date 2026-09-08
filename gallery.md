@@ -305,6 +305,80 @@ Slidev's built-in layout passes them.
 `::bottom::` is an optional row underneath, anchored to the bottom of the slide. Leave it out and it costs no space.
 
 ---
+layout: conversation
+session: Flaky checkout suite
+---
+
+# conversation
+
+::turns::
+
+<ChatTurn role="user">
+
+The checkout suite fails about one run in five on CI. Never locally.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+The assertion races the toast animation. `getByRole` resolves the moment the node mounts, but the button stays `aria-disabled` until the transition ends.
+
+</ChatTurn>
+
+<ChatTurn role="tool" meta="npm test — 50 runs" v-click>
+
+```
+✗ checkout › places the order   9 failed, 41 passed
+```
+
+</ChatTurn>
+
+<ChatTurn role="user" who="Oliver" meta="14:02" v-click>
+
+Don't paper over it with a sleep. Wait on the state you actually care about.
+
+</ChatTurn>
+
+<ChatTurn role="agent" v-click>
+
+Swapped the sleep for `toBeEnabled()`, which polls the attribute instead of the clock.
+
+</ChatTurn>
+
+<ChatTurn role="tool" meta="npm test — 50 runs" v-click>
+
+```
+✓ checkout › places the order   50 passed
+```
+
+</ChatTurn>
+
+---
+layout: default
+---
+
+# conversation
+
+A fixed viewport onto a taller stack. Each click reveals the next turn and slides the stack up; history scrolls off under a gradient. This slide is the tape at its last click — hence the count top-right.
+
+```md
+---
+layout: conversation
+session: Flaky checkout suite
+---
+
+::turns::
+
+<ChatTurn role="user">…</ChatTurn>
+
+<ChatTurn role="agent" v-click>…</ChatTurn>
+```
+
+- `role` is `user`, `agent` or `tool`; `who` overrides the cap and `meta` adds a note
+- Pacing is Slidev's own `v-click` — the layout only reads the classes it leaves behind
+- **Export with `--with-clicks`**, or the PDF gets one page with the history already scrolled off
+
+---
 layout: statement
 ---
 

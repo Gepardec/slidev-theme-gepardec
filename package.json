@@ -47,6 +47,7 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@slidev/cli": "^52.16.0",
     "lefthook": "^2.1.10",
+    "playwright-chromium": "^1.63.0",
     "semantic-release": "^25.0.5"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
