@@ -12,7 +12,6 @@
     "styles",
     "setup",
     "assets",
-    "uno.config.ts",
     "example.md"
   ],
   "description": "Gepardec-branded Slidev theme — black background, gepardec yellow accents, italic condensed typography, // bullet markers.",
@@ -54,6 +53,7 @@
       "fonts": {
         "sans": "Barlow Semi Condensed",
         "mono": "JetBrains Mono",
+        "weights": "300,400,500,600,700",
         "italic": true
       },
       "highlighter": "shiki"

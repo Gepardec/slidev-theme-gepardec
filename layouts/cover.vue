@@ -46,13 +46,11 @@ import CheetahSujet from '../components/CheetahSujet.vue'
   flex: 0 1 31.54%;
 }
 
-/* Not the master content headline — the title slide sets its Titel far larger.
-   The case follows the same token, so a deck that opts out of caps opts out
-   here too. */
+/* Not the master content headline — the title slide sets its Titel far larger. */
 .cover-content :deep(h1) {
   font-size: 5.742rem;
   line-height: 1;
-  text-transform: var(--gepardec-headline-transform);
+  text-transform: uppercase;
   color: var(--gepardec-yellow);
   font-weight: 400;
   margin: 0;
@@ -62,7 +60,7 @@ import CheetahSujet from '../components/CheetahSujet.vue'
 .cover-content :deep(h2) {
   font-size: 3.19rem;
   line-height: 1.1;
-  text-transform: var(--gepardec-headline-transform);
+  text-transform: uppercase;
   color: var(--gepardec-white);
   font-weight: 400;
   margin: 3.26rem 0 0;

@@ -3,14 +3,12 @@ theme: ./
 title: Gepardec Theme — Example Deck
 info: |
   Example deck demonstrating the Gepardec Slidev theme.
-highlighter: shiki
 drawings:
   persist: false
-mdc: true
 layout: cover
 ---
 
-# Java Enterprise<br/>Modernization
+# Java Enterprise Modernization
 
 ## Quarkus & Jakarta EE
 
@@ -29,7 +27,7 @@ layout: agenda
 - The migration path
 - Tech stack comparison
 - Effort vs. risk
-- Implementation and next steps 
+- Implementation and next steps
 
 ---
 layout: section
@@ -106,7 +104,7 @@ OpenShift as the target platform, with the observability stack
 in place before the first workload moves.
 
 ---
-layout: two-cols
+layout: two-cols-header
 ---
 
 # Tech stack comparison
@@ -180,7 +178,7 @@ Use `@ObservesAsync` on the consumer for true async handling.
 layout: statement
 ---
 
-# We only recommend<br/>**what we can technically justify.**
+# We only recommend **what we can technically justify.**
 
 ---
 layout: contact

@@ -17,7 +17,8 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `agenda`     | Agenda slide. Headline + numbered `// n` entries.         |
 | `quadrants`  | Headline + four `//` subheading blocks on a 2x2 raster.   |
 | `default`    | Standard content. Title + `//` bullets, minimal layout.   |
-| `two-cols`   | Side-by-side content with a title above two columns.      |
+| `two-cols`   | Side-by-side content, Slidev's `two-cols` slot contract.   |
+| `two-cols-header` | Headline spanning two columns, plus optional bottom row. |
 | `statement`  | Big bold statement — no cheetah.                          |
 | `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
 
@@ -27,11 +28,13 @@ share the master's single background placement, from one `CheetahSujet`
 component.
 
 Every layout takes its headline from the markdown flow — the first heading on
-the slide, before any `::slot::` marker. `default`, `two-cols`, `agenda`,
-`quadrants` and `contact` render it as the master's content headline: uppercase,
-3.445rem, weight 400. `cover` and `section` set their far larger *Titel*
-instead — uppercase too on `cover`, as the master has it — and `statement` sets
-a sentence, upright in white.
+the slide, before any `::slot::` marker. `default`, `agenda`, `quadrants` and
+`contact` render it as the master's content headline: uppercase, 3.445rem,
+weight 400. `cover` and `section` set their far larger *Titel* instead —
+uppercase too on `cover`, as the master has it — and `statement` sets a
+sentence, upright in white. `two-cols` is the exception: it follows Slidev's
+own slot contract, which has no headline above the columns — use
+`two-cols-header` when you want one.
 
 Close a deck with `contact`, or with `statement` when there is no person to put
 on it.
@@ -99,7 +102,7 @@ master — and any paragraphs after them are pushed to the bottom-left as the
 layout: cover
 ---
 
-# Java Enterprise<br/>Modernization
+# Java Enterprise Modernization
 
 ## Quarkus & Jakarta EE
 
@@ -109,8 +112,8 @@ March 2026
 ```
 
 Titles are set at the master's size (~5.7rem) and in caps, which is wider than
-it reads in the editor — break long titles with `<br/>`, and the layout
-compresses its top spacing before it overflows.
+it reads in the editor. A long title wraps inside the title column on its own,
+and the layout compresses its top spacing before it overflows.
 
 ### Section break
 
@@ -244,11 +247,39 @@ list when copy needs to be set apart.
 
 ### Two columns
 
-The headline is whatever precedes `::left::`:
+`two-cols` follows Slidev's own slot contract: everything before `::right::`
+fills the left column, everything after it fills the right one. `::left::` is
+accepted as an explicit name for the left column, as in Slidev.
 
 ```md
 ---
 layout: two-cols
+---
+
+### Legacy
+- Java EE 7
+- Manual deploys
+
+::right::
+
+### Target
+- Jakarta EE 10
+- CI/CD
+```
+
+There is no headline slot spanning both columns — that is `two-cols-header`,
+below.
+
+### Two columns with a headline
+
+`two-cols-header` follows Slidev's contract of the same name: the default slot
+is the headline spanning both columns, `::left::` and `::right::` are the
+columns, and `::bottom::` is an optional row underneath, anchored to the bottom
+of the slide.
+
+```md
+---
+layout: two-cols-header
 ---
 
 # Tech stack comparison
@@ -264,7 +295,14 @@ layout: two-cols
 ### Target
 - Jakarta EE 10
 - CI/CD
+
+::bottom::
+
+Both stacks stay in production through the migration.
 ```
+
+The headline is the master's content headline — uppercase, yellow. Leave
+`::bottom::` out and it costs no space.
 
 ### Statement slide
 
@@ -275,7 +313,7 @@ layout: two-cols
 layout: statement
 ---
 
-# We only recommend<br/>**what we can technically justify.**
+# We only recommend **what we can technically justify.**
 ```
 
 ### Contact slide
@@ -395,40 +433,12 @@ All theme colors and fonts are CSS variables defined in `styles/layout.css`:
 }
 ```
 
-Override them in a project-level `style.css`. Two of them shape the layouts
+Override them in a project-level `style.css`. One of them shapes the layouts
 rather than the palette:
 
 | Variable                        | Default    | Effect                                              |
 |---------------------------------|------------|-----------------------------------------------------|
-| `--gepardec-headline-transform` | `uppercase`| Set to `none` to keep every headline as written.      |
 | `--gepardec-margin-x`           | `5.827%`   | The master's side margin — every layout aligns to it.|
-
-### UnoCSS color scale
-
-The brand yellow is also exposed as a full UnoCSS color scale (`uno.config.ts`),
-so you can use it with any utility class, including opacity modifiers:
-
-```html
-<div class="bg-gepardec-500 text-black">…</div>
-<span class="text-gepardec-300">accent</span>
-<div class="border border-gepardec-500 bg-opacity-10">…</div>
-```
-
-Shades run from `gepardec-50` through `gepardec-900`, with `gepardec-500`
-(`#FFC800`) as the brand default.
-
-## Bullet style opt-out
-
-All `<ul>` bullets render as `//` in Gepardec yellow. To opt out for a
-single list, wrap it in `.no-slash-bullets`:
-
-```md
-<div class="no-slash-bullets">
-
-- regular bullets here
-
-</div>
-```
 
 ## Run the example
 
