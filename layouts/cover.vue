@@ -2,20 +2,11 @@
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
 import CheetahSujet from '../components/CheetahSujet.vue'
-
-defineProps<{
-  /**
-   * Optional override for the cover image.
-   * Pass a path relative to your deck's public/ directory (e.g. "/my-cover.jpg").
-   * Defaults to the cheetah asset bundled with the theme.
-   */
-  image?: string
-}>()
 </script>
 
 <template>
   <div class="gepardec-cover slidev-layout">
-    <CheetahSujet :image="image" />
+    <CheetahSujet />
 
     <!--
       Slot flow mirrors the corporate title slide:

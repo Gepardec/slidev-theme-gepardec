@@ -144,6 +144,7 @@ layout: default
 
 ---
 layout: section
+variant: ascii
 ---
 
 # Part 2

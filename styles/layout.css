@@ -169,16 +169,29 @@
    ------------------------------------------------------------------------ */
 .gepardec-sujet {
   position: absolute;
-  /* Measured off the corporate title slide: the sujet is scaled to ~97% of the
-     slide height and pushed left until the muzzle centre line sits on the slide
-     edge, leaving the right eye at ~10% width. */
-  left: -30.25%;
-  top: 4%;
-  width: 60.4%;
   height: auto;
   z-index: 0;
   pointer-events: none;
   user-select: none;
+}
+
+/* Measured off the corporate title slide: the sujet is scaled to ~97% of the
+   slide height and pushed left until the muzzle centre line sits on the slide
+   edge, leaving the right eye at ~10% width. */
+.gepardec-sujet--cheetah {
+  left: -30.25%;
+  top: 4%;
+  width: 60.4%;
+}
+
+/* The ASCII sujet is already cropped to the half face, so it needs no negative
+   offset — it sits on the slide edge and bleeds off the top and bottom to the
+   same optical height as the photographic one. */
+.gepardec-sujet--ascii {
+  left: 0;
+  top: -1%;
+  width: auto;
+  height: 102%;
 }
 
 /* ------------------------------------------------------------------------

@@ -3,20 +3,24 @@ import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
 import CheetahSujet from '../components/CheetahSujet.vue'
 
-defineProps<{
-  /**
-   * Optional override for the section image.
-   * Defaults to the cheetah sujet bundled with the theme.
-   */
-  image?: string
-}>()
+withDefaults(
+  defineProps<{
+    /**
+     * Which sujet the divider carries — the master's photographic cheetah, or
+     * the ASCII rendering of the same face. Set it per slide in frontmatter:
+     * `variant: ascii`.
+     */
+    variant?: 'cheetah' | 'ascii'
+  }>(),
+  { variant: 'cheetah' },
+)
 </script>
 
 <template>
   <div class="gepardec-section slidev-layout">
     <!-- The master reuses one background for the title slide and the
          "Zwischenfolie", so the placement comes from the shared component. -->
-    <CheetahSujet :image="image" />
+    <CheetahSujet :variant="variant" />
 
     <div class="section-content gepardec-content">
       <slot />

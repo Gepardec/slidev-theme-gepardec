@@ -68,6 +68,8 @@ The official Gepardec assets are bundled inside the theme at `assets/`:
 
 - `assets/cheetah-sujet.webp` — cheetah sujet for `cover`, `section` and
   `contact` (transparent PNG source, exported as WebP with its alpha intact)
+- `assets/ascii-sujet.webp` — the same face rendered in ASCII, selectable on
+  `section` slides with `variant: ascii`
 - `assets/logo.png` — footer wordmark
 - `assets/spots.png` — corner decoration
 
@@ -76,17 +78,9 @@ They are imported by the Vue components (`CheetahSujet`, `GepardecLogo`,
 transparently no matter where your slide deck lives.
 To swap any of them, replace the file and rebuild.
 
-### Overriding the cover image per slide
-
-To use a different image on a specific `cover` or `section` slide, pass an
-`image:` prop pointing at a file in **your own** `public/` directory:
-
-```yaml
----
-layout: cover
-image: /my-custom-cover.jpg
----
-```
+The sujet is brand artwork, so it is not swappable per slide — `section` picks
+between the two official renderings with `variant:` (see below), and `cover` and
+`contact` always carry the photographic one.
 
 ## Usage
 
@@ -129,6 +123,23 @@ layout: section
 
 ## Implementation
 ```
+
+The divider carries the same sujet as the title slide. Set `variant: ascii` in
+the frontmatter to swap it for the ASCII rendering of the same face — cropped to
+the half face, so it sits flush on the left slide edge:
+
+```md
+---
+layout: section
+variant: ascii
+---
+
+# Part 2
+
+## Implementation
+```
+
+`variant` accepts `cheetah` (the default) and `ascii`; there is no third option.
 
 ### Agenda slide
 
@@ -296,7 +307,6 @@ phone: +43 664 1167 681
 | `web`        | `www.gepardec.com`                                 |
 | `email`      | —                                                  |
 | `phone`      | —                                                  |
-| `image`      | bundled cheetah asset                              |
 | `social`     | `true` — set `false` to drop the badge row         |
 
 `web`, `email`, and `phone` become `https:` / `mailto:` / `tel:` links.

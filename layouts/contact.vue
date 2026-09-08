@@ -6,8 +6,6 @@ import CheetahSujet from '../components/CheetahSujet.vue'
 
 const props = withDefaults(
   defineProps<{
-    /** Left-hand image. Defaults to the cheetah asset bundled with the theme. */
-    image?: string
     /** Portrait, e.g. "/contact.jpg" for a file in your deck's public/ dir. */
     photo?: string
     /** Path shown in the portrait placeholder while `photo` is unset. */
@@ -52,7 +50,7 @@ const segments = (path: string) =>
 <template>
   <div class="gepardec-contact gepardec-headline slidev-layout">
     <!-- The Kontakt slide shares the title slide's background in the master. -->
-    <CheetahSujet :image="image" />
+    <CheetahSujet />
 
     <div class="contact-content gepardec-content">
       <div class="contact-head">
