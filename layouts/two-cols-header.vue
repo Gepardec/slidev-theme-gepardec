@@ -2,9 +2,12 @@
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
 
-/* Slidev's built-in `two-cols-header` hands `class` to the three content areas
-   and `layoutClass` to the layout root. Decks written against it expect that,
-   so this one takes the same two props. */
+/* Slidev's built-in `two-cols-header` hands `class` to the two columns and the
+   bottom row — not to the header, which the built-in leaves untouched — and
+   `layoutClass` to the layout root. Decks written against it expect exactly
+   that split, so this one takes the same two props and applies them the same
+   way. A per-slide `class:` styles the columns; to reach the headline, use
+   `layoutClass:` and select within it. */
 const props = defineProps<{
   class?: string
   layoutClass?: string

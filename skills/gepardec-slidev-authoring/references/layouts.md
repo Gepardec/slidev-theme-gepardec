@@ -184,6 +184,10 @@ Beide Pfade laufen sechs Wochen parallel.
 - The default slot (before `::left::`) is the spanning headline.
 - `::bottom::` is anchored to the bottom of the slide. Leave it out and it
   costs no space.
+- Takes the `class` and `layoutClass` props Slidev's built-in passes. As in the
+  built-in, `class` lands on the two columns and the bottom row only — the
+  headline is not styled by it. Use `layoutClass` when you need to reach the
+  whole slide, headline included.
 
 ## statement
 
