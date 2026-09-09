@@ -46,6 +46,14 @@ built-in's name honours that built-in's slot contract. When a request seems to
 need one of those, the design is wrong, not the constraint — say so and propose
 a layout that fits. This is a standing decision, not a preference to re-litigate.
 
+## How much fits
+
+Body copy is sized so a `default` slide takes five bullets comfortably and
+eight at the limit. Nothing shrinks to fit — content past the limit runs off
+the bottom edge. A slide that genuinely needs more takes `class:
+gepardec-text-sm`; one with room to spare takes `gepardec-text-lg`. The
+reference has the budgets per layout.
+
 ## Choosing a layout
 
 `default` unless the slide genuinely needs another shape. Reaching for an exotic

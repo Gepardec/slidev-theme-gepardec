@@ -30,6 +30,31 @@
   --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
   --gepardec-font-body:    'Barlow Semi Condensed', system-ui, sans-serif;
   --gepardec-font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* Type scale ------------------------------------------------------------
+     Sized for Slidev's 980 px canvas, not converted from the master. The
+     master states its text sizes on a canvas of its own and is not consistent
+     between slides about them; carrying those numbers over gave a body copy
+     that either swam in white space or filled a slide in five lines. What is
+     kept from the master is the display end — the Titel, the Untertitel and
+     the content headline are brand geometry and stay measured.
+
+     From `md` down and up to `xl` the ratio is a steady ~1.22. Body copy is
+     `md`, 22 px on the 980 px canvas: five bullets then fill about two thirds
+     of a default slide's content box and eight still fit, which is the range
+     a content slide has to cover. `sm` and `lg` are the two steps a deck can
+     move body copy to with a class; the rest carry the headings. */
+  --gepardec-text-xs:  0.95rem;  /* 15 px — captions and meta lines */
+  --gepardec-text-sm:  1.15rem;  /* 18 px — the dense step */
+  --gepardec-text-md:  1.4rem;   /* 22 px — body copy */
+  --gepardec-text-lg:  1.7rem;   /* 27 px — lead paragraph, the roomy step */
+  --gepardec-text-xl:  2.1rem;   /* 34 px — subheads */
+  --gepardec-text-2xl: 3.445rem; /* 55 px — the master's content headline */
+
+  /* What body copy currently resolves to. `gepardec-text-sm` and
+     `gepardec-text-lg` move it; everything that should follow reads this
+     token, and everything with a size of its own does not. */
+  --gepardec-body-size: var(--gepardec-text-md);
 }
 
 /* ------------------------------------------------------------------------
@@ -40,13 +65,19 @@
      :root — declared here they win for everything on the slide, no !important. */
   --slidev-code-background: #111111;
   --slidev-code-foreground: #e6e6e6;
+  /* Slidev's own code sizing — 12 px on 18 px leading — is deliberately left
+     alone. It is the one thing on a content slide that is not read from the
+     back of the room but pointed at, and it is what a slide has least room
+     for: a twelve-line listing under a headline and a line of prose only fits
+     at this size. Scaling it with the body copy bought nothing and cost a
+     listing its blank lines. */
 
   background-color: var(--gepardec-black);
   color: var(--gepardec-white);
   font-family: var(--gepardec-font-body);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: var(--gepardec-body-size);
   line-height: 1.5;
   /* The master's margins. Layouts that place their own content box override
      this; the rest — and Slidev's built-in layouts — inherit it. */
@@ -54,6 +85,29 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+}
+
+/* The two steps a deck can move body copy to, for a slide that genuinely runs
+   long or genuinely runs short:
+
+     ---
+     layout: two-cols
+     class: gepardec-text-sm
+     ---
+
+   Each redefines the token rather than setting a size outright, so it works
+   wherever it lands — Slidev's `class:` reaches the slide root on most layouts
+   but the columns on `two-cols` and `two-cols-header` — and a wrapper element
+   around part of a slide takes only that part with it. Headings keep their own
+   sizes; this is the body-copy step and nothing else. */
+.gepardec-text-sm {
+  --gepardec-body-size: var(--gepardec-text-sm);
+  font-size: var(--gepardec-body-size);
+}
+
+.gepardec-text-lg {
+  --gepardec-body-size: var(--gepardec-text-lg);
+  font-size: var(--gepardec-body-size);
 }
 
 .slidev-layout h1,
@@ -68,16 +122,21 @@
   margin: 0;
 }
 
-.slidev-layout h1 { font-size: 2.8rem; line-height: 1.1; }
-.slidev-layout h2 { font-size: 2rem;   line-height: 1.15; }
-.slidev-layout h3 { font-size: 1.5rem; line-height: 1.2; color: var(--gepardec-white); }
-.slidev-layout h4 { font-size: 1.2rem; line-height: 1.25; color: var(--gepardec-white); }
+/* h1 is the slide headline and sits at the top of the scale on its own; the
+   gap below it is the master's and is meant to be read as one. h2 to h4 are
+   the in-slide ramp, each a step of the scale, and h4 lands on body copy —
+   below that a heading would set smaller than the list under it, so colour and
+   weight carry the last level instead of size. */
+.slidev-layout h1 { font-size: var(--gepardec-text-2xl); line-height: 1.1; }
+.slidev-layout h2 { font-size: var(--gepardec-text-xl);  line-height: 1.15; }
+.slidev-layout h3 { font-size: var(--gepardec-text-lg);  line-height: 1.2;  color: var(--gepardec-white); }
+.slidev-layout h4 { font-size: var(--gepardec-text-md);  line-height: 1.25; color: var(--gepardec-white); }
 
 /* Master content headline — the uppercase yellow headline the corporate master
    puts on its content slides. Layouts opt in with `gepardec-headline` on their
    root; `cover`, `section` and `statement` carry their own headline instead. */
 .gepardec-headline h1 {
-  font-size: 3.445rem;
+  font-size: var(--gepardec-text-2xl);
   line-height: 1;
   font-weight: 400;
   text-transform: uppercase;
@@ -99,19 +158,25 @@
 }
 
 .slidev-layout p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  /* em, so the rhythm follows the step a slide is set at — a rem gap would
+     stay put while the type around it moved. */
+  margin-top: 0.9em;
+  margin-bottom: 0.9em;
   /* Unitless, so it scales with a layout's own font-size. */
   line-height: 1.5;
 }
 
-/* Lead paragraph — first <p> immediately after a heading */
-.slidev-layout h1 + p,
-.slidev-layout h2 + p {
-  font-size: 1.25rem;
+/* Lead paragraph — the first <p> after the slide headline. One step up from
+   body copy, so the sentence that frames a slide reads before the list does.
+   The step is em rather than the `lg` token because a lead is body copy: on a
+   slide set to `gepardec-text-sm` it has to come down with the rest.
+   The headline only: an h2 is a subhead inside a slide here, and a paragraph
+   set larger under one outranks the h3 that follows it. */
+.slidev-layout h1 + p {
+  font-size: 1.22em;
   color: var(--gepardec-gray-text);
-  margin-top: 0.6rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
 }
 
 .slidev-layout strong {
@@ -134,13 +199,13 @@
   border: 0;
   border-top: 1px solid var(--gepardec-yellow);
   opacity: 0.4;
-  margin: 1.25rem 0;
+  margin: 1.1em 0;
 }
 
 .slidev-layout blockquote {
   border-left: 3px solid var(--gepardec-yellow);
-  padding-left: 1rem;
-  margin: 1rem 0;
+  padding-left: 0.9em;
+  margin: 0.9em 0;
   color: var(--gepardec-white);
 }
 
@@ -151,7 +216,7 @@
 .slidev-layout th,
 .slidev-layout td {
   text-align: left;
-  padding: 0.5rem 0.75rem;
+  padding: 0.45em 0.7em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .slidev-layout th {

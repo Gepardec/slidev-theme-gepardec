@@ -19,6 +19,7 @@ Rendered from the theme source
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # Cover
@@ -33,8 +34,6 @@ layout: cover
 # Layout gallery
 
 ## Every layout, every slot
-
-slidev-theme-gepardec
 ```
 
 - The first heading is the *Titel*, the second the *Untertitel* — both uppercased by the layout
@@ -59,6 +58,7 @@ layout: agenda
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # Agenda
@@ -74,12 +74,10 @@ layout: agenda
 
 - Cover and section
 - Agenda
-- Quadrants
 ```
 
-- Six entries is what the master fits in one column
+- Six entries fill one column; twelve is the maximum, and each half is only ~27rem wide
 - Bullet lists and ordered lists render identically — the number is the position
-- Twelve is the maximum, but each half is only ~27rem wide — keep split entries terse
 
 ---
 layout: agenda
@@ -119,6 +117,7 @@ variant: ascii
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # Section
@@ -132,8 +131,6 @@ variant: ascii
 ---
 
 # Section
-
-## variant: ascii
 ```
 
 - `cheetah` is the default; `ascii` is the same face, cropped flush to the left edge
@@ -162,16 +159,13 @@ layout: default
 
 1. Ordered lists keep their numbers, tinted yellow
 2. The marker is italic, like the entry
-3. Use them where sequence carries meaning
 
-| Element    | Treatment                          |
-|------------|------------------------------------|
+| Element    | Treatment                           |
+|------------|-------------------------------------|
 | `th`       | Yellow, with a yellow rule under it |
 | `td`       | White, hairline rule                |
-| Blockquote | Yellow bar on the left              |
 
-> A blockquote sets a line apart without a box — the theme draws no bordered
-> content boxes anywhere.
+> A blockquote sets a line apart without a box.
 
 ---
 layout: default
@@ -179,7 +173,7 @@ layout: default
 
 # Code
 
-Fenced blocks pick up the theme's Shiki setup. Line-highlight markers focus the audience on what matters:
+Shiki highlighting, at Slidev's own compact code sizing:
 
 ```java {4-5}
 @ApplicationScoped
@@ -190,8 +184,8 @@ public class OrderService {
 }
 ```
 
-- Write the range in braces after the language: `java {4-5}`
-- The highlight band spans the full block width
+- Write the highlight range in braces after the language: `java {4-5}`
+- The band runs the length of the line and merges into the block's yellow edge
 - Magic-move transitions keep a single border through the animation
 
 ---
@@ -215,8 +209,8 @@ Blocks fill the 2x2 raster in reading order. Supply only `::one::` and
 ::three::
 
 ### ::three::
-Paragraphs run at the master's uniform line pitch with no gap between them.
-That is the reference slide, not an oversight.
+Copy is set at the dense step and paragraphs run with no gap between them.
+That is the master's rhythm, not an oversight.
 
 ::four::
 
@@ -226,6 +220,7 @@ over the one below it.
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # Quadrants
@@ -243,9 +238,6 @@ layout: quadrants
 Strangler boundary around the JSF shell.
 
 ::two::
-
-### Security
-Keycloak-backed auth from the first service.
 ```
 
 - Four named slots: `::one::` through `::four::`, filled in reading order
@@ -355,11 +347,12 @@ Swapped the sleep for `toBeEnabled()`, which polls the attribute instead of the 
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # conversation
 
-A fixed viewport onto a taller stack. Each click reveals the next turn and slides the stack up; history scrolls off under a gradient. This slide is the tape at its last click — hence the count top-right.
+A fixed viewport onto a taller stack. Each click reveals the next turn and slides the stack up; history scrolls off under a gradient.
 
 ```md
 ---
@@ -370,13 +363,10 @@ session: Flaky checkout suite
 ::turns::
 
 <ChatTurn role="user">…</ChatTurn>
-
-<ChatTurn role="agent" v-click>…</ChatTurn>
 ```
 
 - `role` is `user`, `agent` or `tool`; `who` overrides the cap and `meta` adds a note
-- Pacing is Slidev's own `v-click` — the layout only reads the classes it leaves behind
-- **Export with `--with-clicks`**, or the PDF gets one page with the history already scrolled off
+- Pacing is Slidev's own `v-click`; **export with `--with-clicks`** or the PDF gets one page
 
 ---
 layout: statement
@@ -393,22 +383,21 @@ social: false
 
 ---
 layout: default
+class: gepardec-text-sm
 ---
 
 # Contact
 
-Everything except the person is filled in already. The slide before this one sets three props; the one after it sets all of them.
+Everything except the person is filled in already.
 
-| Prop                                  | Default                     |
-|---------------------------------------|-----------------------------|
-| `name` `role` `photo` `email` `phone` | —                           |
-| `photoPath`                           | `public/contact.jpg`        |
-| `company`                             | `Gepardec IT Services GmbH` |
-| `locations`                           | Wien + Linz                 |
-| `web`                                 | `www.gepardec.com`          |
-| `social`                              | `true` — `false` drops them |
+| Prop                                  | Default                        |
+|---------------------------------------|--------------------------------|
+| `name` `role` `photo` `email` `phone` | —                              |
+| `photoPath`                           | `public/contact.jpg`           |
+| `company` `locations`                 | Gepardec IT Services, Wien + Linz |
+| `web`                                 | `www.gepardec.com`             |
 
-A heading replaces the default `Kontakt`, and `::note::` adds a line under the badges.
+`social` is `true`; `false` drops the badges. A heading replaces `Kontakt`, and `::note::` adds a line underneath.
 
 ---
 layout: contact

@@ -13,10 +13,15 @@
   /* Left rule weights — the user's is the loud one. */
   --gepardec-chat-rule-user:  3px;
   --gepardec-chat-rule-agent: 1px;
-  /* Body copy inside a turn. Deliberately below the master's 1.05rem: a
-     transcript is read, not declaimed. */
-  --gepardec-chat-body:      0.92rem;
-  --gepardec-chat-cap:       0.72rem;
+  /* Body copy inside a turn. Deliberately a step below the slide's: a
+     transcript is read, not declaimed, and the tape stacks many turns into
+     one viewport. These are the layout's own sizes, so `gepardec-text-sm` on
+     a conversation slide changes nothing. */
+  --gepardec-chat-body:      var(--gepardec-text-sm);
+  --gepardec-chat-cap:       var(--gepardec-text-xs);
+  /* Monospace inside a turn — a tool turn's whole body, and any block. Set
+     against the turn's own body copy, not the slide's. */
+  --gepardec-chat-mono:      0.82em;
   /* Yellow wash behind a user turn. */
   --gepardec-chat-user-wash: rgba(var(--gepardec-yellow-rgb), 0.08);
 }
@@ -98,11 +103,18 @@
   color: inherit;
 }
 
+/* A block inside a turn belongs to the turn's scale, not the slide's. The
+   size comes from Slidev's own token rather than a `font-size` here — Slidev's
+   rule outranks this selector, so a declaration would be dead weight — and the
+   token inherits to every <pre> in the turn. */
+.chat-turn__body {
+  --slidev-code-font-size:   var(--gepardec-chat-mono);
+  --slidev-code-line-height: 1.4;
+  --slidev-code-padding:     0.5em 0.7em;
+}
+
 .chat-turn__body pre {
   margin: 0.35rem 0;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.78rem;
-  line-height: 1.35;
 }
 
 /* Inline code, quieter than the master's. On a content slide `code` is a
@@ -172,7 +184,7 @@
 
 .chat-turn--tool .chat-turn__body {
   font-family: var(--gepardec-font-mono);
-  font-size: 0.78rem;
+  font-size: calc(var(--gepardec-chat-body) * 0.82);
   line-height: 1.45;
   color: var(--gepardec-gray-text);
 }
@@ -213,7 +225,7 @@
   font-family: var(--gepardec-font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: 0.7rem;
+  font-size: var(--gepardec-text-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gepardec-gray-muted);
