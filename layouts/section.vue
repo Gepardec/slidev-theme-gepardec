@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
-import defaultCheetah from '../assets/cheetah.jpg'
+import CheetahSujet from '../components/CheetahSujet.vue'
 
-defineProps<{
-  /**
-   * Optional override for the section image.
-   * Defaults to the cheetah asset bundled with the theme.
-   */
-  image?: string
-}>()
+withDefaults(
+  defineProps<{
+    /**
+     * Which sujet the divider carries — the master's photographic cheetah, or
+     * the ASCII rendering of the same face. Set it per slide in frontmatter:
+     * `variant: ascii`.
+     */
+    variant?: 'cheetah' | 'ascii'
+  }>(),
+  { variant: 'cheetah' },
+)
 </script>
 
 <template>
   <div class="gepardec-section slidev-layout">
-    <div
-      class="section-image"
-      :style="{ backgroundImage: `url(${image ?? defaultCheetah})` }"
-    />
+    <!-- The master reuses one background for the title slide and the
+         "Zwischenfolie", so the placement comes from the shared component. -->
+    <CheetahSujet :variant="variant" />
 
-    <div class="section-content">
+    <div class="section-content gepardec-content">
       <slot />
     </div>
 
@@ -29,46 +32,44 @@ defineProps<{
 </template>
 
 <style scoped>
+/* Geometry measured off the corporate "Zwischenfolie": same cheetah sujet and
+   text column as the title slide, but with the heading centred vertically. */
 .gepardec-section {
   padding: 0;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: 1fr;
-  align-items: stretch;
-}
-
-.section-image {
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  background-size: cover;
-  background-position: right center;
 }
 
 .section-content {
+  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  padding: 3rem 4rem 3rem 1rem;
-  z-index: 3;
+  /* The bottom padding nudges the optical centre up to the master's baseline. */
+  padding: 0 var(--gepardec-margin-x) 0.46rem 33.44%;
 }
 
+/* Same headline as the title slide, not the master content headline. */
 .section-content :deep(h1) {
-  font-size: 3.4rem;
-  line-height: 1.05;
+  font-size: 5.742rem;
+  line-height: 1;
   color: var(--gepardec-yellow);
+  font-weight: 400;
   margin: 0;
 }
 
+/* Not in the master — an optional second line for decks that want one. */
 .section-content :deep(h2) {
-  font-size: 1.3rem;
+  font-size: 3.19rem;
+  line-height: 1.1;
   color: var(--gepardec-white);
-  margin-top: 0.6rem;
+  font-weight: 400;
+  margin: 1.6rem 0 0;
 }
 
 .section-content :deep(p) {
   color: var(--gepardec-white);
-  font-size: 0.95rem;
+  font-size: 1.404rem;
+  line-height: 1.522;
+  margin: 1.2rem 0 0;
 }
 </style>

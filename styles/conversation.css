@@ -1,0 +1,225 @@
+/* ============================================================
+   Gepardec Slidev Theme — Conversation
+   Tokens and turn styling for the `conversation` layout and the
+   `ChatTurn` component it stacks on its tape.
+   ============================================================ */
+
+.slidev-layout {
+  /* Vertical rhythm between turns. */
+  --gepardec-chat-gap:       0.8rem;
+  /* How far an agent turn sits inside the user's left edge, so the two
+     roles read apart even before colour registers. */
+  --gepardec-chat-indent:    2.1rem;
+  /* Left rule weights — the user's is the loud one. */
+  --gepardec-chat-rule-user:  3px;
+  --gepardec-chat-rule-agent: 1px;
+  /* Body copy inside a turn. Deliberately below the master's 1.05rem: a
+     transcript is read, not declaimed. */
+  --gepardec-chat-body:      0.92rem;
+  --gepardec-chat-cap:       0.72rem;
+  /* Yellow wash behind a user turn. */
+  --gepardec-chat-user-wash: rgba(var(--gepardec-yellow-rgb), 0.08);
+}
+
+/* ------------------------------------------------------------------------
+   A single turn
+   ------------------------------------------------------------------------ */
+.chat-turn {
+  position: relative;
+  padding: 0.42rem 0.9rem 0.5rem;
+  border-left-style: solid;
+  /* Turns are stacked by their container's `gap`, so no margin here — a
+     margin would survive the hidden state and desync the tape's
+     measurement. */
+  margin: 0;
+}
+
+/* The role cap. `//` comes from the layout, matching the theme's bullet
+   and quadrant markers, so the author writes plain text. */
+.chat-turn__cap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--gepardec-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--gepardec-chat-cap);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.28rem;
+}
+
+.chat-turn__role::before {
+  content: '// ';
+  letter-spacing: normal;
+}
+
+.chat-turn__meta {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--gepardec-gray-muted);
+  text-transform: none;
+}
+
+/* Message body. The master sets everything italic; a paragraph of
+   transcript at this size is punishing that way, so the body goes upright
+   and the italics stay on the caps and headlines. */
+.chat-turn__body {
+  font-style: normal;
+  font-size: var(--gepardec-chat-body);
+  line-height: 1.42;
+}
+
+.chat-turn__body p {
+  margin: 0 0 0.4rem;
+  font-size: inherit;
+  line-height: inherit;
+  font-style: normal;
+  color: inherit;
+}
+
+.chat-turn__body p:last-child,
+.chat-turn__body ul:last-child,
+.chat-turn__body ol:last-child,
+.chat-turn__body pre:last-child {
+  margin-bottom: 0;
+}
+
+.chat-turn__body ul,
+.chat-turn__body ol {
+  margin: 0 0 0.4rem;
+  font-size: inherit;
+}
+
+.chat-turn__body li {
+  line-height: 1.42;
+  margin: 0;
+  color: inherit;
+}
+
+.chat-turn__body pre {
+  margin: 0.35rem 0;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* Inline code, quieter than the master's. On a content slide `code` is a
+   boxed yellow chip and there are two of them; a transcript sentence can
+   carry six, and six chips is a rash rather than an emphasis. Same yellow,
+   no box. */
+.chat-turn__body :not(pre) > code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 0.9em;
+  color: var(--gepardec-yellow);
+}
+
+/* A tool turn already is a code ground with a yellow rule down its edge, so
+   the block inside it drops its own frame instead of drawing a second one
+   just inside the first. */
+.chat-turn--tool .slidev-code {
+  border: 0;
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+}
+
+/* --- You ----------------------------------------------------------------- */
+.chat-turn--user {
+  border-left-width: var(--gepardec-chat-rule-user);
+  border-left-color: var(--gepardec-yellow);
+  background: var(--gepardec-chat-user-wash);
+}
+
+.chat-turn--user .chat-turn__cap {
+  color: var(--gepardec-yellow);
+}
+
+.chat-turn--user .chat-turn__body {
+  color: var(--gepardec-white);
+  font-weight: 500;
+}
+
+/* --- Agent --------------------------------------------------------------- */
+.chat-turn--agent {
+  margin-left: var(--gepardec-chat-indent);
+  border-left-width: var(--gepardec-chat-rule-agent);
+  border-left-color: rgba(255, 255, 255, 0.28);
+}
+
+.chat-turn--agent .chat-turn__cap {
+  color: var(--gepardec-gray-muted);
+}
+
+.chat-turn--agent .chat-turn__body {
+  color: var(--gepardec-gray-text);
+}
+
+/* --- Tool call ----------------------------------------------------------- */
+.chat-turn--tool {
+  margin-left: var(--gepardec-chat-indent);
+  border-left-width: var(--gepardec-chat-rule-agent);
+  border-left-color: var(--gepardec-yellow-dim);
+  background: var(--slidev-code-background);
+}
+
+.chat-turn--tool .chat-turn__cap {
+  color: var(--gepardec-yellow-dim);
+}
+
+.chat-turn--tool .chat-turn__body {
+  font-family: var(--gepardec-font-mono);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--gepardec-gray-text);
+}
+
+.chat-turn--tool .chat-turn__body p {
+  line-height: 1.45;
+}
+
+/* ------------------------------------------------------------------------
+   Click states
+
+   Slidev tags every element it paces with `slidev-vclick-current` and
+   `slidev-vclick-prior` — but the tape's opening turn carries no `v-click`
+   at all (it is there when the slide opens), so it would never be tagged and
+   would stay lit while everything around it dimmed. The tape sets `is-prior`
+   and `is-current` itself, over every turn, from the same measuring pass
+   that positions the stack.
+   ------------------------------------------------------------------------ */
+.chat-turn.is-prior {
+  opacity: 0.45;
+}
+
+.chat-turn.is-current {
+  opacity: 1;
+}
+
+/* A turn that has not been reached yet keeps its box — the tape measures
+   against a stable stack — but must not bleed through the mask. */
+.chat-turn.slidev-vclick-hidden {
+  opacity: 0;
+}
+
+/* ------------------------------------------------------------------------
+   The small yellow-on-black counter along the tape's foot — the session
+   label and the turn count.
+   ------------------------------------------------------------------------ */
+.chat-counter {
+  font-family: var(--gepardec-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gepardec-gray-muted);
+}
+
+.chat-counter strong {
+  color: var(--gepardec-yellow);
+  font-weight: 500;
+}

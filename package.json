@@ -12,7 +12,6 @@
     "styles",
     "setup",
     "assets",
-    "uno.config.ts",
     "example.md"
   ],
   "description": "Gepardec-branded Slidev theme — black background, gepardec yellow accents, italic condensed typography, // bullet markers.",
@@ -35,7 +34,11 @@
     "build": "slidev build example.md",
     "dev": "slidev example.md --open",
     "export": "slidev export example.md",
-    "screenshot": "slidev export example.md --format png"
+    "screenshot": "slidev export example.md --format png",
+    "dev:gallery": "slidev gallery.md --open",
+    "build:gallery": "slidev build gallery.md",
+    "screenshot:gallery": "slidev export gallery.md --format png",
+    "check:surfaces": "node scripts/check-surfaces.mjs"
   },
   "dependencies": {
     "@slidev/types": "^52.16.0"
@@ -45,6 +48,7 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@slidev/cli": "^52.16.0",
     "lefthook": "^2.1.10",
+    "playwright-chromium": "^1.63.0",
     "semantic-release": "^25.0.5"
   },
   "//": "Learn more: https://sli.dev/guide/write-theme.html",
@@ -54,6 +58,7 @@
       "fonts": {
         "sans": "Barlow Semi Condensed",
         "mono": "JetBrains Mono",
+        "weights": "300,400,500,600,700",
         "italic": true
       },
       "highlighter": "shiki"

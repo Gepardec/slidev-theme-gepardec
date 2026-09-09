@@ -2,3 +2,12 @@ commit-msg:
   commands:
     "lint commit message":
       run: pnpm commitlint --edit {1}
+
+# Runs only when a push actually carries a layout or component change, so
+# ordinary docs and style pushes stay silent. Iterate and commit freely; the
+# surfaces only have to agree before the change leaves the machine.
+pre-push:
+  commands:
+    "theme surfaces in sync":
+      glob: "{layouts,components}/*.vue"
+      run: node scripts/check-surfaces.mjs

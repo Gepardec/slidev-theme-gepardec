@@ -2,12 +2,10 @@
 import GepardecLogo from '../components/GepardecLogo.vue'
 import CornerSpots from '../components/CornerSpots.vue'
 import SocialLinks from '../components/SocialLinks.vue'
-import defaultCheetah from '../assets/cheetah.jpg'
+import CheetahSujet from '../components/CheetahSujet.vue'
 
 const props = withDefaults(
   defineProps<{
-    /** Left-hand image. Defaults to the cheetah asset bundled with the theme. */
-    image?: string
     /** Portrait, e.g. "/contact.jpg" for a file in your deck's public/ dir. */
     photo?: string
     /** Path shown in the portrait placeholder while `photo` is unset. */
@@ -50,16 +48,15 @@ const segments = (path: string) =>
 </script>
 
 <template>
-  <div class="gepardec-contact slidev-layout">
-    <div
-      class="contact-image"
-      :style="{ backgroundImage: `url(${image ?? defaultCheetah})` }"
-    />
+  <div class="gepardec-contact gepardec-headline slidev-layout">
+    <!-- The Kontakt slide shares the title slide's background in the master. -->
+    <CheetahSujet />
 
-    <div class="contact-content">
+    <div class="contact-content gepardec-content">
       <div class="contact-head">
         <div class="contact-identity">
-          <slot name="title">
+          <!-- Headline comes from the markdown flow, as in every other layout. -->
+          <slot>
             <h1>Kontakt</h1>
           </slot>
           <p v-if="name" class="contact-name">{{ name }}</p>
@@ -112,7 +109,7 @@ const segments = (path: string) =>
       />
 
       <div class="contact-extra">
-        <slot />
+        <slot name="note" />
       </div>
     </div>
 
@@ -128,28 +125,15 @@ const segments = (path: string) =>
   --contact-label-width: 4.6rem;
 
   padding: 0;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1fr;
-  align-items: stretch;
-}
-
-.contact-image {
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  background-size: cover;
-  background-position: right center;
 }
 
 .contact-content {
+  height: 100%;
   display: flex;
   flex-direction: column;
   /* The reference slide is bottom-anchored, not centred. */
   justify-content: flex-end;
-  padding: 2rem 3rem 1.9rem 2.05rem;
-  z-index: 3;
+  padding: 2rem var(--gepardec-margin-x) 1.9rem 33.44%;
   min-width: 0;
 }
 
@@ -166,12 +150,10 @@ const segments = (path: string) =>
   min-width: 0;
 }
 
+/* Treatment comes from `gepardec-headline`; the master sets this one white
+   rather than yellow. */
 .contact-identity :deep(h1) {
-  font-size: 3.45rem;
-  line-height: 1.15;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: var(--gepardec-contact-title-color);
+  color: var(--gepardec-white);
   margin: 0 0 0.55rem 0;
 }
 
@@ -182,7 +164,7 @@ const segments = (path: string) =>
   font-weight: 300;
   font-size: 1.7rem;
   line-height: 1.22;
-  color: var(--gepardec-contact-name-color);
+  color: var(--gepardec-white);
   margin: 0;
 }
 

@@ -63,15 +63,3 @@
   font-weight: 600;
   font-style: italic;
 }
-
-/* Opt-out helper: wrap a list in .no-slash-bullets to get standard bullets */
-.slidev-layout .no-slash-bullets ul {
-  list-style: disc;
-  padding-left: 1.5em;
-}
-.slidev-layout .no-slash-bullets ul > li {
-  padding-left: 0;
-}
-.slidev-layout .no-slash-bullets ul > li::before {
-  content: none;
-}
