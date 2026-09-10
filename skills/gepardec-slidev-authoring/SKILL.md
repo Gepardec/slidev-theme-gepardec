@@ -1,6 +1,7 @@
 ---
 name: gepardec-slidev-authoring
 description: "Author Slidev decks with the Gepardec theme — its ten layouts, their slots and props, the rules the corporate master enforces, and a script that drafts a `conversation` slide from a real Claude Code session transcript. Use this skill whenever the user is writing, editing, reviewing or debugging a Slidev deck that uses slidev-theme-gepardec (any deck whose headmatter names `@gepardec/slidev-theme-gepardec`), whenever they mention a Gepardec slide or a cover, agenda, quadrants, section, statement, contact or conversation layout, and whenever they want to turn an AI or agent session into slides — even if they never name the theme."
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 ---
 
 # Slidev theme: Gepardec
