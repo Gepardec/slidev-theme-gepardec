@@ -394,7 +394,7 @@ Everything except the person is filled in already.
 |---------------------------------------|--------------------------------|
 | `name` `role` `photo` `email` `phone` | —                              |
 | `photoPath`                           | `public/contact.jpg`           |
-| `company` `locations`                 | Gepardec IT Services, Wien + Linz |
+| `company` `locations`                 | Gepardec IT Services GmbH, Wien + Linz |
 | `web`                                 | `www.gepardec.com`             |
 
 `social` is `true`; `false` drops the badges. A heading replaces `Kontakt`, and `::note::` adds a line underneath.

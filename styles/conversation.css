@@ -131,11 +131,12 @@
 
 /* A tool turn already is a code ground with a yellow rule down its edge, so
    the block inside it drops its own frame instead of drawing a second one
-   just inside the first. */
+   just inside the first. The horizontal inset goes with the frame — the turn
+   has already inset its own body, and a second one reads as a hanging indent.
+   It has to leave through the token: Slidev sets the <pre>'s padding shorthand
+   with `!important`, so a `padding-left` here would never land. */
 .chat-turn--tool .slidev-code {
   border: 0;
-  padding-left: 0;
-  padding-right: 0;
   background: transparent;
 }
 
@@ -183,6 +184,7 @@
 }
 
 .chat-turn--tool .chat-turn__body {
+  --slidev-code-padding: 0.5em 0;
   font-family: var(--gepardec-font-mono);
   font-size: calc(var(--gepardec-chat-body) * 0.82);
   line-height: 1.45;
