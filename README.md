@@ -262,9 +262,10 @@ OpenShift as the target platform, observability in place first.
 The headline is whatever precedes `::one::`. Blocks fill the raster in order —
 supply only `::one::` and `::two::` and you get the top row.
 
-Inside a block, paragraphs run at the master's uniform line pitch with no gap
-between them, exactly as in the reference slide. Use a second block or a `//`
-list when copy needs to be set apart.
+Inside a block, copy is set at the scale's dense step — four blocks on one
+slide is what that step is for — and paragraphs run with no gap between them,
+as in the reference slide. Use a second block or a `//` list when copy needs to
+be set apart. Roughly five lines per block before its row deepens.
 
 ### Two columns
 
@@ -514,6 +515,58 @@ Standard Markdown is themed automatically — no extra components required:
 - **Blockquotes** get a yellow left border
 - **Links** are yellow with a subtle underline
 
+## Type scale
+
+Body copy is 22 px on Slidev's 980 px canvas. Five bullets fill about two
+thirds of a `default` slide and eight still fit — that range is what the scale
+is set for, so most slides need nothing from this section.
+
+| Token                  | Size      | Used for                                     |
+|------------------------|-----------|----------------------------------------------|
+| `--gepardec-text-xs`   | `0.95rem` | Captions and meta lines                      |
+| `--gepardec-text-sm`   | `1.15rem` | The dense step                               |
+| `--gepardec-text-md`   | `1.4rem`  | Body copy                                    |
+| `--gepardec-text-lg`   | `1.7rem`  | Lead paragraph, `h3`, the roomy step         |
+| `--gepardec-text-xl`   | `2.1rem`  | `h2`                                         |
+| `--gepardec-text-2xl`  | `3.445rem`| `h1` and the content headline                |
+
+The display sizes on `cover`, `section`, `agenda` and `contact` are measured
+off the corporate master and are not part of this scale.
+
+### Moving a slide up or down a step
+
+Two classes shift body copy — headings keep their own sizes:
+
+```md
+---
+layout: default
+class: gepardec-text-sm
+---
+```
+
+`gepardec-text-sm` takes body copy to 18 px for a slide that genuinely runs
+long; `gepardec-text-lg` takes it to 27 px for one that runs short. Lists,
+paragraphs, the lead paragraph and tables all follow, and their spacing is
+relative so the rhythm holds at either step. Fenced code does not — it keeps
+Slidev's own compact sizing, which is what lets a real listing share a slide
+with a headline and a line of prose.
+
+Slidev's `class:` lands on the slide root for most layouts but on **both
+columns** for `two-cols` and `two-cols-header`. To take only part of a slide
+down, wrap that part instead:
+
+```md
+<div class="gepardec-text-sm">
+
+- A long list that needs the density
+- While the rest of the slide stays put
+
+</div>
+```
+
+Reach for it when a slide is genuinely dense. A deck where every slide carries
+the class is a deck with too much on its slides.
+
 ## Customization
 
 ### CSS variables
@@ -531,12 +584,13 @@ All theme colors and fonts are CSS variables defined in `styles/layout.css`:
 }
 ```
 
-Override them in a project-level `style.css`. One of them shapes the layouts
+Override them in a project-level `style.css`. Two of them shape the layouts
 rather than the palette:
 
 | Variable                        | Default    | Effect                                              |
 |---------------------------------|------------|-----------------------------------------------------|
 | `--gepardec-margin-x`           | `5.827%`   | The master's side margin — every layout aligns to it.|
+| `--gepardec-body-size`          | `1.4rem`   | What body copy currently resolves to; the two classes above retarget it.|
 
 ## Run the example
 

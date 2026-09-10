@@ -1,18 +1,22 @@
 /* ============================================================
    Gepardec bullet style — // in gepardec yellow, white text
    Applies to all <ul> in slide content.
+
+   Spacing is em throughout, so a list keeps its rhythm at every step of the
+   scale. The indents already were; the vertical gaps were rem and would have
+   stayed put while the type moved.
    ============================================================ */
 
 .slidev-layout ul {
   list-style: none;
   padding-left: 0;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 
 .slidev-layout ul > li {
   position: relative;
   padding-left: 1.9em;
-  margin: 0.4rem 0;
+  margin: 0.4em 0;
   line-height: 1.45;
   color: var(--gepardec-white);
   font-style: italic;
@@ -32,7 +36,7 @@
 
 /* Nested lists — slightly dimmer marker, indented */
 .slidev-layout ul ul {
-  margin: 0.2rem 0;
+  margin: 0.2em 0;
 }
 .slidev-layout ul ul > li {
   padding-left: 1.7em;
@@ -50,10 +54,10 @@
 .slidev-layout ol {
   list-style: decimal;
   padding-left: 1.6em;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
 }
 .slidev-layout ol > li {
-  margin: 0.4rem 0;
+  margin: 0.4em 0;
   line-height: 1.45;
   color: var(--gepardec-white);
   font-style: italic;

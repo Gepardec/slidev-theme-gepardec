@@ -46,6 +46,9 @@ import CornerSpots from '../components/CornerSpots.vue'
   /* Block top to the top of the subheading's line box, so the subheading's
      baseline lands on the master's (34.344 px below the box top). */
   --quadrant-head-offset: 0.297rem;
+  /* The master butts its body copy straight under the subheading; at readable
+     leading the two need a hairline of air between them. */
+  --quadrant-head-gap: 0.35rem;
 
   /* The master's side margins are the theme's; only the bottom differs — the
      block raster runs to the slide edge. */
@@ -90,13 +93,13 @@ import CornerSpots from '../components/CornerSpots.vue'
 .quadrant :deep(h2),
 .quadrant :deep(h3),
 .quadrant :deep(h4) {
-  font-size: 1.404rem;
+  font-size: var(--gepardec-text-md);
   line-height: 1.15;
   font-weight: 400;
   font-style: italic;
   color: var(--gepardec-yellow);
   text-transform: none;
-  margin: 0;
+  margin: 0 0 var(--quadrant-head-gap);
 }
 
 .quadrant :deep(h1)::before,
@@ -110,13 +113,18 @@ import CornerSpots from '../components/CornerSpots.vue'
   letter-spacing: normal;
 }
 
-/* Body copy. The master runs its paragraphs at one uniform 24 px pitch with no
-   space between them, so `margin: 0` here is the master, not an oversight —
-   use a second block or a `//` list when copy needs to be set apart. */
+/* Body copy at the scale's dense step — four blocks on one slide is the case
+   `gepardec-text-sm` exists for, and this layout is in it by construction.
+   The master's own line pitch is 24 px on 22.667 px type, which set the lines
+   close enough to touch; the raster below is still the master's, only the
+   leading is opened up to something readable at the back of a room.
+
+   The master runs its paragraphs with no space between them, so `margin: 0`
+   here is the master, not an oversight — use a second block or a `//` list
+   when copy needs to be set apart. */
 .quadrant :deep(p) {
-  font-size: 1.085rem;
-  /* 24 px pitch on 22.667 px type, straight off the master. */
-  line-height: 1.0588;
+  font-size: var(--gepardec-text-sm);
+  line-height: 1.35;
   font-weight: 400;
   color: var(--gepardec-white);
   margin: 0;
@@ -124,12 +132,12 @@ import CornerSpots from '../components/CornerSpots.vue'
 
 .quadrant :deep(ul),
 .quadrant :deep(ol) {
-  font-size: 1.085rem;
+  font-size: var(--gepardec-text-sm);
   margin: 0;
 }
 
 .quadrant :deep(li) {
-  line-height: 1.0588;
+  line-height: 1.35;
   margin: 0;
 }
 </style>

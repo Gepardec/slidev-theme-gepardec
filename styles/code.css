@@ -19,7 +19,10 @@
   color: var(--gepardec-yellow);
   padding: 0.1em 0.4em;
   border-radius: 3px;
-  font-size: 0.9em;
+  /* Not the 0.9em that suits a normal-width body face. This theme's is
+     condensed, so a monospace set beside it at the same nominal size reads
+     considerably larger — this is where the two look equal. */
+  font-size: 0.78em;
   border: 1px solid rgba(var(--gepardec-yellow-rgb), 0.2);
 }
 
@@ -42,6 +45,12 @@
 .slidev-layout .slidev-code-highlighted {
   background: rgba(var(--gepardec-yellow-rgb), 0.12);
   border-left: 2px solid var(--gepardec-yellow);
+  /* Pulled left through the block's 8 px padding so the band starts flush with
+     the block's own edge rather than at the first glyph. The margin overshoots
+     that padding on purpose: the band carries a 2 px edge of its own, and only
+     outside the padding box does the <pre>'s `overflow` clip it. Pulled exactly
+     as far as the padding, that edge paints as a second rule beside the block's
+     yellow border. Keep the overshoot if `--slidev-code-padding` changes. */
   margin-left: -1.27rem;
   padding-left: 1.1rem;
 }
