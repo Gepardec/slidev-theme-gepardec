@@ -276,6 +276,37 @@ Green. One thing left that is yours to decide: `CdiProducers` still imports `jav
 </ChatTurn>
 
 ---
+layout: document
+source: adr-007.md — order-service
+---
+
+# The decision behind it
+
+::doc::
+
+# ADR-007: Namespace migration through the build
+
+## Context
+
+Fifteen modules still import `javax.*`. Hand-editing them is a day per module and has to be repeated for every module that lags behind, and the first one already showed that sources are not the only place the old namespace hides.
+
+## Decision
+
+### Rewrite sources in the build
+
+The Eclipse Transformer runs in `process-sources` and rewrites `javax.*` to `jakarta.*`. No module is hand-edited, and a module migrates by inheriting the parent POM.
+
+### Move descriptors by hand
+
+The transformer rewrites Java sources, not resources. `persistence.xml` and `beans.xml` move to the Jakarta schemas in the same change as the module that owns them.
+
+## Consequences
+
+- Every module gets the same treatment, so the fifteenth costs what the second did
+- `provided`-scope imports are skipped and stay on `javax.*` until a JDK bump forces them
+- The transformer leaves the build once the last module is on `jakarta.*` natively
+
+---
 layout: statement
 ---
 
