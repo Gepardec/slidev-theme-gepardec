@@ -7,6 +7,7 @@ own source or demo decks are at hand while you are writing a deck.
 ## Contents
 
 - [The headline rule](#the-headline-rule) — applies to every layout
+- [How much fits on a slide](#how-much-fits-on-a-slide) — applies to every layout
 - [cover](#cover) · [section](#section) · [agenda](#agenda) · [default](#default)
 - [quadrants](#quadrants) · [two-cols](#two-cols) · [two-cols-header](#two-cols-header)
 - [statement](#statement) · [contact](#contact) · [conversation](#conversation)
@@ -30,6 +31,52 @@ How that heading is rendered differs, and this is the part people get wrong:
 A slide is a Vue template once Slidev has parsed the markdown, so anything in
 angle brackets is read as a component tag, not as text. `<Firstname Lastname>`
 renders as nothing at all. Write placeholders plain.
+
+---
+
+## How much fits on a slide
+
+Body copy is 22 px on Slidev's 980 px canvas, and the scale is set so that a
+`default` slide takes **five bullets comfortably and eight at the limit**. Two
+short paragraphs and a list, or a lead line and a ten-line code block, are
+about the same load. Nothing scrolls and nothing shrinks to fit: content past
+the limit runs off the bottom edge and over the footer logo.
+
+Write to that budget first. When a slide genuinely needs more, two classes
+shift body copy a step — headings keep their own sizes:
+
+```md
+---
+layout: default
+class: gepardec-text-sm
+---
+```
+
+| Class                | Body copy | For                                        |
+|----------------------|-----------|--------------------------------------------|
+| `gepardec-text-sm`   | 18 px     | A slide that genuinely runs long           |
+| `gepardec-text-lg`   | 27 px     | A slide with one thought and room to spare |
+
+Lists, paragraphs, the lead paragraph and tables all follow the step, and their
+spacing is relative, so the rhythm holds either way. Fenced code does not — it
+keeps Slidev's own compact sizing at every step.
+
+Slidev's `class:` lands on the slide root for most layouts but on **both
+columns** for `two-cols` and `two-cols-header`. To take only part of a slide
+down, wrap that part instead — blank lines around the tag keep the markdown
+inside it parsing as markdown:
+
+```md
+<div class="gepardec-text-sm">
+
+- A long list that needs the density
+- While the rest of the slide stays put
+
+</div>
+```
+
+A deck where every slide carries `gepardec-text-sm` is a deck with too much on
+its slides. Split it instead.
 
 ---
 
@@ -100,6 +147,10 @@ a different shape. Headline, then ordinary markdown.
 
 - Bullets take the yellow `//` marker; nested bullets step down and dim.
 - **Bold** carries brand yellow, *italic* stays white.
+- The first paragraph after the headline is set a step larger and in grey — a
+  lead line. Later paragraphs are ordinary body copy.
+- Five bullets is comfortable, eight is the limit. See
+  [How much fits on a slide](#how-much-fits-on-a-slide).
 - Tables, ordered lists, blockquotes and fenced code are all styled — see
   [Code and prose](#code-and-prose).
 
@@ -129,9 +180,11 @@ Keycloak ab dem ersten Service.
   the top row and nothing else — the empty ones cost no space.
 - Any heading level works as the subheading; the layout sets them all alike.
 - The `//` before a subheading is drawn by the layout. Write the text plain.
-- Paragraphs inside a block run at uniform line pitch with no gap between them.
-  That is deliberate, not an oversight — use a second block or a `//` list when
-  copy needs to be set apart.
+- Copy inside a block is set at the dense step — four blocks on one slide is
+  what that step is for. Roughly five lines per block before its row deepens.
+- Paragraphs inside a block run with no gap between them. That is deliberate,
+  not an oversight — use a second block or a `//` list when copy needs to be
+  set apart.
 - A block that outgrows its box deepens its row rather than spilling into the
   one below.
 
@@ -315,8 +368,13 @@ they read the current turn and skim the two above it.
 
 ## Code and prose
 
-- Fenced blocks use the theme's Shiki setup. Line highlights go in braces after
-  the language: ` ```java {4-5} `. The band spans the full block width.
+- Fenced blocks use the theme's Shiki setup and keep Slidev's own compact
+  sizing rather than following the body step. That is deliberate: code is the
+  thing a slide has least room for, and at this size a twelve-line listing
+  still fits under a headline and a line of prose.
+- Line highlights go in braces after the language: ` ```java {4-5} `. The band
+  runs the length of the highlighted line and merges into the block's yellow
+  left edge.
 - Magic-move keeps a single border through the animation.
 - `inline code` is JetBrains Mono; links are yellow with a dim underline.
 - Blockquotes get a yellow left bar — the theme draws no bordered content boxes

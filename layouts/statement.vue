@@ -29,7 +29,7 @@ import CornerSpots from '../components/CornerSpots.vue'
 /* A statement is a sentence, not a master headline: set upright in white, with
    the emphasis carrying the brand yellow. */
 .statement-content :deep(h1) {
-  font-size: 3.5rem;
+  font-size: var(--gepardec-text-2xl);
   line-height: 1.1;
   color: var(--gepardec-white);
   font-weight: 400;
@@ -41,8 +41,10 @@ import CornerSpots from '../components/CornerSpots.vue'
   font-weight: 500;
 }
 
+/* The line under a statement is the scale's roomy step, not a size of this
+   layout's own — it supports the sentence above it and still has to carry. */
 .statement-content :deep(p) {
-  font-size: 1.2rem;
+  font-size: var(--gepardec-text-lg);
   color: var(--gepardec-white);
   margin-top: 1.5rem;
 }
