@@ -189,6 +189,50 @@ public class OrderService {
 - Magic-move transitions keep a single border through the animation
 
 ---
+layout: two-cols
+---
+
+# Mermaid
+
+```mermaid
+flowchart LR
+  A[Proposal] --> B{Review}
+  B -->|approved| C[Apply]
+  B -->|changes| A
+  subgraph Archive
+    C --> D[Spec]
+  end
+```
+
+::right::
+
+```mermaid
+sequenceDiagram
+  Author->>Agent: propose change
+  Agent->>Spec: read current state
+  Agent-->>Author: tasks.md
+```
+
+---
+layout: default
+---
+
+# Mermaid — source
+
+Plain fenced blocks; the theme's Mermaid setup does the colouring:
+
+````md
+```mermaid
+flowchart LR
+  A[Proposal] --> B{Review}
+  B -->|approved| C[Apply]
+```
+````
+
+- No `style` or `classDef` lines — every diagram gets the same palette
+- Classic look and dagre layout are pinned, so Mermaid 12 does not widen nodes
+
+---
 layout: quadrants
 ---
 
