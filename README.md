@@ -511,6 +511,10 @@ Standard Markdown is themed automatically — no extra components required:
 - **Code blocks** get a dark background with a yellow left border, syntax
   highlighting via Shiki (`vitesse-dark` / `vitesse-light`), and support
   line-highlight markers like ` ```java {1,3-5} `
+- **Mermaid diagrams** render on the black ground with grey node borders,
+  yellow edges and Barlow labels — flowcharts and sequence diagrams alike, with
+  no `style` lines in the diagram. The theme pins Mermaid's classic look and
+  dagre layout, so decks render the same on Mermaid 11 and 12
 - **Tables** get yellow header text and thin dividers
 - **Blockquotes** get a yellow left border
 - **Links** are yellow with a subtle underline

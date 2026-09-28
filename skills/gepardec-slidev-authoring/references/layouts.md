@@ -376,6 +376,9 @@ they read the current turn and skim the two above it.
   runs the length of the highlighted line and merges into the block's yellow
   left edge.
 - Magic-move keeps a single border through the animation.
+- ` ```mermaid ` blocks come out in brand colours — grey node borders, yellow
+  edges and sequence messages, Barlow labels. Write no `style` or `classDef`
+  lines for colour; the theme sets them once for every diagram.
 - `inline code` is JetBrains Mono; links are yellow with a dim underline.
 - Blockquotes get a yellow left bar — the theme draws no bordered content boxes
   anywhere, so a blockquote is how you set a line apart.
