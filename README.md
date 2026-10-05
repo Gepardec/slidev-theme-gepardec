@@ -126,9 +126,9 @@ layout: cover
 
 ## Quarkus & Jakarta EE
 
-Oliver Tod
+Max Mustermann
 
-March 2026
+DD.MM.YYYY
 ```
 
 Titles are set at the master's size (~5.7rem) and in caps, which is wider than
@@ -351,11 +351,11 @@ spots. Everything except the person is already filled in:
 ```md
 ---
 layout: contact
-name: Günter Pirklbauer
+name: Max Mustermann
 role: CEO
 photo: /contact.jpg
-email: guenter.pirklbauer@gepardec.com
-phone: +43 664 1167 681
+email: max.mustermann@gepardec.com
+phone: +43 664 123 4567
 ---
 ```
 
@@ -465,7 +465,7 @@ Reading the reactor first.
 `role` is `user`, `agent` or `tool` and drives the whole treatment — the user
 speaks at the left margin behind a thick yellow rule, the agent is indented
 behind a thin grey one, a tool call is mono on the code ground. `who` overrides
-the role cap (`who="Oliver"`), `meta` adds a muted note beside it
+the role cap (`who="Max"`), `meta` adds a muted note beside it
 (`meta="mvn -q verify"`). `session` is the label along the tape's foot.
 
 Message bodies are set upright, against the master's italic: a paragraph of

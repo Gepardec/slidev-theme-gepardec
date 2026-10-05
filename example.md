@@ -12,9 +12,9 @@ layout: cover
 
 ## Quarkus & Jakarta EE
 
-Oliver Tod
+Max Mustermann
 
-March 2026
+DD.MM.YYYY
 
 ---
 layout: agenda
@@ -314,8 +314,8 @@ layout: statement
 
 ---
 layout: contact
-name: Günter Pirklbauer
+name: Max Mustermann
 role: CEO
-email: guenter.pirklbauer@gepardec.com
-phone: +43 664 1167 681
+email: max.mustermann@gepardec.com
+phone: +43 664 123 4567
 ---

@@ -15,7 +15,7 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   /** Who is speaking. Drives the whole visual treatment. */
   role?: 'user' | 'agent' | 'tool'
-  /** Override the role cap, e.g. `who="Oliver"` or `who="Claude"`. */
+  /** Override the role cap, e.g. `who="Max"` or `who="Claude"`. */
   who?: string
   /** Small muted note next to the cap — a timestamp, a model, a token count. */
   meta?: string

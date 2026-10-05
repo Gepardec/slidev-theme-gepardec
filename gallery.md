@@ -369,7 +369,7 @@ The assertion races the toast animation. `getByRole` resolves the moment the nod
 
 </ChatTurn>
 
-<ChatTurn role="user" who="Oliver" meta="14:02" v-click>
+<ChatTurn role="user" who="Max" meta="14:02" v-click>
 
 Don't paper over it with a sleep. Wait on the state you actually care about.
 
@@ -634,10 +634,10 @@ Everything except the person is filled in already.
 
 ---
 layout: contact
-name: Günter Pirklbauer
+name: Max Mustermann
 role: CEO
-email: guenter.pirklbauer@gepardec.com
-phone: +43 664 1167 681
+email: max.mustermann@gepardec.com
+phone: +43 664 123 4567
 linkedin: https://www.linkedin.com/company/gepardec
 xing: https://www.xing.com/pages/gepardec
 locations:
