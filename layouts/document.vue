@@ -496,7 +496,7 @@ watch(active, apply, { flush: 'post' })
          them on every click. A parent heading too long for one line wraps
          rather than being cut, and the stage under it still never moves. -->
     <div class="doc-head gepardec-content">
-      <div class="doc-cap doc-head__row">
+      <div class="gepardec-caption doc-head__row">
         <div class="doc-head__name">
           <span class="doc-head__title"><slot /></span>
           <span v-if="props.source" class="doc-head__source">{{ props.source }}</span>
@@ -504,7 +504,7 @@ watch(active, apply, { flush: 'post' })
         <span class="doc-head__count"><strong>{{ active + 1 }}</strong> / {{ stepCount }}</span>
       </div>
 
-      <div v-if="steps.some(s => s.parent)" class="doc-cap doc-head__where">
+      <div v-if="steps.some(s => s.parent)" class="gepardec-caption doc-head__where">
         <div
           v-for="(step, i) in steps"
           :key="i"
@@ -584,8 +584,6 @@ watch(active, apply, { flush: 'post' })
      read, not declaimed, and this is the step at which a `## Context` of two
      paragraphs and a `## Tests` of eight items both land inside the stage. */
   --doc-body: var(--gepardec-text-sm);
-  /* Hairlines — the same weight the conversation foot uses. */
-  --doc-rule: rgba(var(--gepardec-yellow-rgb), 0.25);
   /* The footer logo's own box, off the master: it is inset 3% from the bottom
      and stands 11% of the slide tall, so its top edge is at 14% and its
      baseline at 3%. The stage runs down to that baseline and reserves the
@@ -611,7 +609,7 @@ watch(active, apply, { flush: 'post' })
   gap: 0.15rem;
   padding-bottom: 0.35rem;
   margin-bottom: 0.7rem;
-  border-bottom: 1px solid var(--doc-rule);
+  border-bottom: 1px solid var(--gepardec-rule);
 }
 
 /* A name on the left, its counter on the right edge — so the two counters
@@ -714,7 +712,7 @@ watch(active, apply, { flush: 'post' })
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border-right: 1px solid var(--doc-rule);
+  border-right: 1px solid var(--gepardec-rule);
   padding-right: var(--doc-gutter);
   /* Not `auto`: a rail that scrolls would hide entries behind a gesture nobody
      makes mid-talk. It is clipped, and dev warns when it has to clip. */
@@ -823,23 +821,6 @@ watch(active, apply, { flush: 'post' })
 
 .doc-child--current .doc-child__num {
   color: var(--gepardec-yellow);
-}
-
-/* The small caption face of the status line — the same recipe the
-   conversation counter uses. */
-.doc-cap {
-  font-family: var(--gepardec-font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: var(--gepardec-text-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gepardec-gray-muted);
-}
-
-.doc-cap strong {
-  color: var(--gepardec-yellow);
-  font-weight: 500;
 }
 
 /* --- The stage ----------------------------------------------------------- */

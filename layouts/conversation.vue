@@ -155,14 +155,14 @@ watch($clicks, remeasure)
            the audience should read it as "there is more above", which is
            true, rather than as a clipped box. -->
       <div class="conv-fade" :class="{ 'conv-fade--active': above > 0 }" />
-      <div v-if="above > 0" class="conv-earlier chat-counter">
+      <div v-if="above > 0" class="conv-earlier gepardec-caption">
         <strong>{{ above }}</strong> earlier {{ above === 1 ? 'turn' : 'turns' }}
       </div>
     </div>
 
     <div class="conv-foot gepardec-content">
-      <span v-if="props.session" class="chat-counter">{{ props.session }}</span>
-      <span class="chat-counter conv-progress">
+      <span v-if="props.session" class="gepardec-caption">{{ props.session }}</span>
+      <span class="gepardec-caption conv-progress">
         Turn <strong>{{ revealed }}</strong> / {{ total }}
       </span>
     </div>
@@ -246,7 +246,7 @@ watch($clicks, remeasure)
   gap: 1rem;
   margin-top: 0.7rem;
   padding-top: 0.45rem;
-  border-top: 1px solid rgba(var(--gepardec-yellow-rgb), 0.25);
+  border-top: 1px solid var(--gepardec-rule);
 }
 
 /* With no session label the counter still belongs on the right. */

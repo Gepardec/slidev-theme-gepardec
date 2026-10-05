@@ -30,7 +30,7 @@
    padding, radius, font-size and line-height from the matching tokens — so all
    this rule adds is the brand's yellow rule down the left edge. */
 .slidev-layout .slidev-code {
-  border: 1px solid rgba(var(--gepardec-yellow-rgb), 0.25);
+  border: 1px solid var(--gepardec-rule);
   border-left: 3px solid var(--gepardec-yellow);
 }
 

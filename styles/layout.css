@@ -11,6 +11,9 @@
   --gepardec-white:      #ffffff;
   --gepardec-gray-text:  #d6d6d6;
   --gepardec-gray-muted: #8a8a8a;
+  /* The yellow hairline: the rules a layout draws around its own chrome, and
+     the frame of a code block. */
+  --gepardec-rule:       rgba(var(--gepardec-yellow-rgb), 0.25);
 
   /* Slidev built-in tokens ------------------------------------------------ */
   --slidev-theme-primary:    var(--gepardec-yellow);
@@ -108,6 +111,26 @@
 .gepardec-text-lg {
   --gepardec-body-size: var(--gepardec-text-lg);
   font-size: var(--gepardec-body-size);
+}
+
+/* The caption face of a layout's own meta lines — the conversation's session
+   label and turn count, the document's status line. A layout's chrome, not a
+   class for decks: a figure in it is set in `strong` and lights yellow. */
+.gepardec-caption {
+  font-family: var(--gepardec-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--gepardec-text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gepardec-gray-muted);
+}
+
+/* Scoped under `.slidev-layout` to outrank the theme's own `strong`, which
+   sets body copy's emphasis heavier than a caption's figure. */
+.slidev-layout .gepardec-caption strong {
+  color: var(--gepardec-yellow);
+  font-weight: 500;
 }
 
 .slidev-layout h1,
