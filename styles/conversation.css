@@ -219,21 +219,3 @@
   opacity: 0;
 }
 
-/* ------------------------------------------------------------------------
-   The small yellow-on-black counter along the tape's foot — the session
-   label and the turn count.
-   ------------------------------------------------------------------------ */
-.chat-counter {
-  font-family: var(--gepardec-font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: var(--gepardec-text-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gepardec-gray-muted);
-}
-
-.chat-counter strong {
-  color: var(--gepardec-yellow);
-  font-weight: 500;
-}

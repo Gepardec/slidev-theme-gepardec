@@ -369,7 +369,7 @@ The assertion races the toast animation. `getByRole` resolves the moment the nod
 
 </ChatTurn>
 
-<ChatTurn role="user" who="Oliver" meta="14:02" v-click>
+<ChatTurn role="user" who="Max" meta="14:02" v-click>
 
 Don't paper over it with a sleep. Wait on the state you actually care about.
 
@@ -413,6 +413,195 @@ session: Flaky checkout suite
 - Pacing is Slidev's own `v-click`; **export with `--with-clicks`** or the PDF gets one page
 
 ---
+layout: document
+source: design.md — orders/split-fulfilment
+---
+
+# document
+
+::doc::
+
+## Context
+
+Fulfilment resolves in a single transaction against one warehouse. Split shipments were modelled in the schema three releases ago but never reached the service layer, so partial availability still fails the whole order.
+
+The checkout frontend already renders per-line delivery dates. It reads them from a field the order service fills with a placeholder.
+
+## Decisions
+
+### Split at the line, not at the order
+
+A line is the smallest unit the warehouse can reserve, and checkout already renders per-line dates. Splitting at the order would need a second entity for something the line already is.
+
+**Alternative considered:** a `ShipmentGroup` between order and line — rejected, it adds a table nobody queries.
+
+### One reservation call per warehouse
+
+The warehouse API rate-limits per call, not per item. Batching by warehouse turns a twelve-line order into two calls instead of twelve.
+
+**Alternative considered:** one call per line, retried — rejected, it spends the whole budget on a busy Monday.
+
+### Partial availability resolves to a partial order
+
+The alternative is failing an order because one line is short, which is the current behaviour and the reason this change exists.
+
+## Risks / Trade-offs
+
+- **Two shipments, one invoice** — finance reconciles against the order, not the shipment. Unchanged here, but it is the next thing to look at.
+- **Reservation windows widen** — a split order holds stock in two warehouses for the same window, so a stalled checkout costs twice the availability.
+
+## Rollout
+
+- Behind `orders.split-fulfilment`, off by default
+- Enabled per tenant once their warehouse mapping is verified
+- The placeholder field stays until the last tenant is switched over
+
+---
+layout: document
+source: spec.md — payroll-month
+depth: 2
+---
+
+# document — depth 2
+
+::doc::
+
+## Requirement
+
+The system resolves an active payroll month per actor and returns it as a `yyyy-MM` string. It is not always the current calendar month, which is why the frontend asks for it before it fetches anything else.
+
+### Employee with open tasks
+
+The previous month is returned — the actor still has month-end work outstanding against it.
+
+### Employee with nothing open
+
+The current month is returned. An empty task list and a month that was never generated are the same answer: nothing is blocking the actor.
+
+## Out of scope
+
+- The legacy provider in the REST layer, which stays until the legacy is decommissioned
+- Any actor other than employee and project lead
+
+---
+layout: document
+source: spec.md — monthend-rest-api
+depth: 4
+---
+
+# document — depth 4
+
+::doc::
+
+## ADDED Requirements
+
+### Requirement: Payroll month is available via role-suffixed endpoints
+
+The system SHALL provide two role-specific payroll month endpoints, one for the employee view and one for the project-lead view, so that an actor holding both roles can request either resolved month independently.
+
+#### Scenario: Employee retrieves their payroll month
+
+- **WHEN** an authenticated employee requests `GET /monthend/payroll-month/employee`
+- **THEN** the API returns the resolved payroll month as a `yyyy-MM` string
+
+#### Scenario: Project lead retrieves their payroll month
+
+- **WHEN** an authenticated project lead requests `GET /monthend/payroll-month/project-lead`
+- **THEN** the resolved month is the previous calendar month
+
+#### Scenario: Unauthenticated caller is refused
+
+- **WHEN** an unauthenticated caller requests either endpoint
+- **THEN** the API rejects the request as unauthorized
+
+### Requirement: Payroll month is resolved once per request
+
+#### Scenario: Month changes during a session
+
+- **WHEN** the calendar month turns while an actor is signed in
+- **THEN** the next request resolves against the new month
+
+#### Scenario: Concurrent requests
+
+- **WHEN** the frontend fires both endpoints at once
+- **THEN** each resolves independently, with no shared state between them
+
+---
+layout: document
+source: proposal.md — split-fulfilment
+---
+
+# document — rail folds itself
+
+::doc::
+
+## Why
+
+Partial availability fails the whole order today. One short line on a twelve-line order cancels the other eleven, and support re-keys the order by hand once stock arrives — which is the single largest category of tickets the order team sees.
+
+## What changes
+
+- **Orders split at the line.** A line the warehouse cannot reserve no longer fails the order; the rest ships, and the short line follows in a shipment of its own once stock arrives.
+- **Reservations batch per warehouse.** One reservation call per warehouse instead of one per line, because the warehouse API rate-limits per call and a busy Monday spends the whole budget otherwise.
+- **The placeholder delivery date goes.** Checkout already renders per-line dates; the order service fills them for real instead of with a placeholder.
+- **Finance keeps reconciling against the order.** Each shipment emits its own fulfilment event, and every one of them carries the order id, so the invoice still has one thing to point at.
+- **Reservation windows are held per line.** A partial order releases what it did not use instead of holding stock in two warehouses for the whole window.
+- **Support stops re-keying orders.** The short line's shipment is created with the order, so nothing has to be entered again when stock arrives.
+- **Rollout is per tenant.** Behind `orders.split-fulfilment`, off by default, enabled for a tenant once their warehouse mapping is verified.
+
+## Impact
+
+The order service, the warehouse adapter and the fulfilment events. Checkout and finance need no change.
+
+---
+layout: document
+source: tasks.md — split-fulfilment
+rail: false
+---
+
+# document — rail folded
+
+::doc::
+
+## 1. Reservation
+
+- [x] 1.1 Group the order's lines by warehouse before reserving, so a twelve-line order costs two calls rather than twelve
+- [x] 1.2 Reserve per warehouse and collect the per-line outcomes rather than failing the batch on the first short line
+- [ ] 1.3 Record the reservation window against the line, not the order, so a partial order releases what it did not use
+
+## 2. Fulfilment
+
+- [ ] 2.1 Resolve a partial order to a partial fulfilment instead of failing the whole order
+- [ ] 2.2 Fill the per-line delivery date the checkout frontend already renders, replacing the placeholder
+- [ ] 2.3 Keep the placeholder field in the payload until the last tenant is switched over
+- [ ] 2.4 Emit one fulfilment event per shipment, with the order id on each, so finance can still reconcile against the order
+
+---
+layout: default
+class: gepardec-text-sm
+---
+
+# document
+
+Paste a document into `::doc::`; the layout partitions it at its own headings.
+
+```md
+---
+layout: document
+source: design.md
+---
+# Design review
+
+::doc::
+
+## Decisions
+```
+
+- The heading and `source` sit small in the status line — the layout reads no file
+- `depth: 2` keeps `###` inside its section; a bodiless heading shares its click
+- `rail` forces the index on or off; left out, it folds when something will not fit
+
+---
 layout: statement
 ---
 
@@ -445,10 +634,10 @@ Everything except the person is filled in already.
 
 ---
 layout: contact
-name: Günter Pirklbauer
+name: Max Mustermann
 role: CEO
-email: guenter.pirklbauer@gepardec.com
-phone: +43 664 1167 681
+email: max.mustermann@gepardec.com
+phone: +43 664 123 4567
 linkedin: https://www.linkedin.com/company/gepardec
 xing: https://www.xing.com/pages/gepardec
 locations:

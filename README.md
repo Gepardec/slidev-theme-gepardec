@@ -22,6 +22,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 | `statement`  | Big bold statement — no cheetah.                          |
 | `contact`    | "Kontakt" slide — person, offices, channels, socials.     |
 | `conversation` | Agent session as a rolling transcript window, paced with `v-click`. |
+| `document`   | A long markdown document, section by section down an index rail. |
 
 Every layout carries the footer logo and the corner spots, as the corporate
 master does. `cover`, `section`, and `contact` add the cheetah sujet — all three
@@ -33,7 +34,9 @@ the slide, before any `::slot::` marker. `default`, `agenda`, `quadrants` and
 `contact` render it as the master's content headline: uppercase, 3.445rem,
 weight 400. `cover` and `section` set their far larger *Titel* instead —
 uppercase too on `cover`, as the master has it — and `statement` sets a
-sentence, upright in white. `two-cols` is the exception: it follows Slidev's
+sentence, upright in white. `document` keeps it as the slide's heading but sets
+it small, in the status line above the stage, so the document gets the height.
+`two-cols` is the exception: it follows Slidev's
 own slot contract, which has no headline above the columns — use
 `two-cols-header` when you want one.
 
@@ -67,7 +70,7 @@ pnpm dev:gallery  # the layout gallery
 ```
 
 Change a layout's geometry and run the gallery — it puts every slot, variant
-and prop of the theme on screen in twenty-one slides, so an overflow or a broken
+and prop of the theme on screen in twenty-nine slides, so an overflow or a broken
 slot shows up immediately.
 
 ### As an npm package
@@ -123,9 +126,9 @@ layout: cover
 
 ## Quarkus & Jakarta EE
 
-Oliver Tod
+Max Mustermann
 
-March 2026
+DD.MM.YYYY
 ```
 
 Titles are set at the master's size (~5.7rem) and in caps, which is wider than
@@ -348,11 +351,11 @@ spots. Everything except the person is already filled in:
 ```md
 ---
 layout: contact
-name: Günter Pirklbauer
+name: Max Mustermann
 role: CEO
 photo: /contact.jpg
-email: guenter.pirklbauer@gepardec.com
-phone: +43 664 1167 681
+email: max.mustermann@gepardec.com
+phone: +43 664 123 4567
 ---
 ```
 
@@ -462,7 +465,7 @@ Reading the reactor first.
 `role` is `user`, `agent` or `tool` and drives the whole treatment — the user
 speaks at the left margin behind a thick yellow rule, the agent is indented
 behind a thin grey one, a tool call is mono on the code ground. `who` overrides
-the role cap (`who="Oliver"`), `meta` adds a muted note beside it
+the role cap (`who="Max"`), `meta` adds a muted note beside it
 (`meta="mvn -q verify"`). `session` is the label along the tape's foot.
 
 Message bodies are set upright, against the master's italic: a paragraph of
@@ -501,12 +504,83 @@ alike. It is the layout's only silent crop, so `slidev dev` outlines such a turn
 and logs how far it overshoots — split it across two `<ChatTurn>` blocks on
 consecutive clicks. The check never runs in a build or an export.
 
+### Putting a long document on a slide
+
+`document` shows a markdown file that was never written for a slide — a design
+doc, an ADR, a spec — without cutting it into slides by hand. An index rail on
+the left carries the document's own table of contents; the stage on the right
+holds the section the rail points at. Each click steps to the next.
+
+Paste the document into `::doc::` as it stands. The layout cuts it at its own
+headings, so there is no second outline to keep in step with it.
+
+````md
+---
+layout: document
+source: design.md — orders/split-fulfilment
+---
+
+# Design review
+
+::doc::
+
+## Context
+
+Fulfilment resolves in a single transaction against one warehouse.
+
+## Decisions
+
+### Split at the line, not at the order
+
+A line is the smallest unit the warehouse can reserve.
+
+### One reservation call per warehouse
+
+The warehouse API rate-limits per call, not per item.
+````
+
+`##` opens a numbered rail entry and `###` a child of it; each is a step. A
+heading with no body of its own shares its click with the heading it leads
+into, and the deeper one is the title on the stage — every step has exactly
+one. A document's own `#` title is not a step; it rides with the first one.
+
+`depth` sets how deep the document is cut: `2` keeps `###` inside its section,
+`4` gives every `####` a step too — the shape of a spec file of `#### Scenario`
+blocks.
+
+The heading before `::doc::` is set small in the status line, followed by
+`source` — a label such as a filename or a change id; the layout reads no file.
+The step count sits at the right of that row. Keep anything else out of the
+space before `::doc::`; it runs on in the same line.
+
+The layout registers one click per step itself, so do not add `v-click` inside
+`::doc::` — two things counting clicks on one slide will not agree on the total.
+
+#### Exporting
+
+Export with `--with-clicks`, as for `conversation`, and each step becomes its
+own PDF page. Without the flag the PDF shows the last step only.
+
+#### When something does not fit
+
+The rail folds away rather than cropping anything. If any section is too tall
+for the stage beside the rail, or the rail too tall for its column, the rail
+folds for the whole document and the stage takes the full slide width; a
+second status row then names the heading above the current title. `rail: true` or
+`rail: false` overrides that decision.
+
+A section too tall even at full width runs off the bottom edge, and `slidev dev`
+outlines it and logs how far it overshoots. Give the long part a heading one
+level deeper and raise `depth` to match, and it becomes a step of its own.
+
 ## Styled Markdown elements
 
 Standard Markdown is themed automatically — no extra components required:
 
 - **Bullet lists** render `//` markers in yellow (nested lists get a dimmer marker)
 - **Ordered lists** keep their numbers, tinted yellow
+- **Task lists** (`- [ ]`, `- [x]`) put a yellow box where the `//` marker
+  would be; done items fill it and dim to grey
 - **Inline `code`** is yellow on a subtle yellow-tinted background
 - **Code blocks** get a dark background with a yellow left border, syntax
   highlighting via Shiki (`vitesse-dark` / `vitesse-light`), and support
@@ -582,6 +656,8 @@ All theme colors and fonts are CSS variables defined in `styles/layout.css`:
   --gepardec-yellow: #FFC800;
   --gepardec-black:  #000000;
   --gepardec-white:  #ffffff;
+  /* The yellow hairline around layout chrome and code blocks. */
+  --gepardec-rule:   rgba(var(--gepardec-yellow-rgb), 0.25);
   --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
   --gepardec-font-mono:    'JetBrains Mono', ui-monospace, monospace;
   /* ... */
