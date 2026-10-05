@@ -340,6 +340,13 @@ function decideRail() {
   if (!el || !fl || props.rail !== undefined)
     return
 
+  /* A document without a `##` has nothing to index: the rail would be an empty
+     column beside the stage. Nothing to measure, so no need to wait. */
+  if (!groups.value.length) {
+    folded.value = true
+    return
+  }
+
   const was = el.classList.contains('gepardec-document--folded')
   el.classList.remove('gepardec-document--folded')
 

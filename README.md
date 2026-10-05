@@ -656,6 +656,8 @@ All theme colors and fonts are CSS variables defined in `styles/layout.css`:
   --gepardec-yellow: #FFC800;
   --gepardec-black:  #000000;
   --gepardec-white:  #ffffff;
+  /* The yellow hairline around layout chrome and code blocks. */
+  --gepardec-rule:   rgba(var(--gepardec-yellow-rgb), 0.25);
   --gepardec-font-display: 'Barlow Semi Condensed', system-ui, sans-serif;
   --gepardec-font-mono:    'JetBrains Mono', ui-monospace, monospace;
   /* ... */
