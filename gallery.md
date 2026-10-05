@@ -565,8 +565,8 @@ rail: false
 
 ## 1. Reservation
 
-- [ ] 1.1 Group the order's lines by warehouse before reserving, so a twelve-line order costs two calls rather than twelve
-- [ ] 1.2 Reserve per warehouse and collect the per-line outcomes rather than failing the batch on the first short line
+- [x] 1.1 Group the order's lines by warehouse before reserving, so a twelve-line order costs two calls rather than twelve
+- [x] 1.2 Reserve per warehouse and collect the per-line outcomes rather than failing the batch on the first short line
 - [ ] 1.3 Record the reservation window against the line, not the order, so a partial order releases what it did not use
 
 ## 2. Fulfilment

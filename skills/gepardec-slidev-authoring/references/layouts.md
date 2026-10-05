@@ -517,6 +517,8 @@ their children is the range where it stays. A document past that wants
   edges and sequence messages, Barlow labels. Write no `style` or `classDef`
   lines for colour; the theme sets them once for every diagram.
 - `inline code` is JetBrains Mono; links are yellow with a dim underline.
+- Task lists (`- [ ]`, `- [x]`) take a yellow box in place of the `//` marker;
+  done items fill it and dim to grey, so the open ones are what the eye finds.
 - Blockquotes get a yellow left bar — the theme draws no bordered content boxes
   anywhere, so a blockquote is how you set a line apart.
 

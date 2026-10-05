@@ -579,6 +579,8 @@ Standard Markdown is themed automatically — no extra components required:
 
 - **Bullet lists** render `//` markers in yellow (nested lists get a dimmer marker)
 - **Ordered lists** keep their numbers, tinted yellow
+- **Task lists** (`- [ ]`, `- [x]`) put a yellow box where the `//` marker
+  would be; done items fill it and dim to grey
 - **Inline `code`** is yellow on a subtle yellow-tinted background
 - **Code blocks** get a dark background with a yellow left border, syntax
   highlighting via Shiki (`vitesse-dark` / `vitesse-light`), and support

@@ -67,3 +67,34 @@
   font-weight: 600;
   font-style: italic;
 }
+
+/* Task lists — `- [ ]` and `- [x]`. The box takes the `//` marker's place
+   rather than standing beside it: two markers on one item read as two lists.
+   Drawn in the brand colours, since the browser's own box is a light-theme
+   control on a black slide. */
+.slidev-layout li.task-list-item::before {
+  content: none;
+}
+
+.slidev-layout .task-list-item-checkbox {
+  appearance: none;
+  position: absolute;
+  left: 0.1em;
+  top: 0.33em;
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0;
+  border: 0.1em solid var(--gepardec-yellow);
+  border-radius: 0.1em;
+  background: transparent center / 80% no-repeat;
+}
+
+.slidev-layout .task-list-item-checkbox:checked {
+  background-color: var(--gepardec-yellow);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 5.2 4 7.6 8.6 2.4' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E");
+}
+
+/* Done is ground covered: still legible, no longer what the eye lands on. */
+.slidev-layout li.task-list-item:has(> .task-list-item-checkbox:checked) {
+  color: var(--gepardec-gray-muted);
+}
