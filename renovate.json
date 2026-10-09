@@ -1,9 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices", ":semanticCommits"],
-  "timezone": "Europe/Vienna",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits",
+    ":timezone(Europe/Vienna)",
+    "schedule:weekly"
+  ],
+  "minimumReleaseAge": "3 days",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
   "automergeStrategy": "merge-commit",
   "platformAutomerge": false,
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
   "lockFileMaintenance": {
     "automerge": true
   },

@@ -7,7 +7,9 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 2 * * *' # 02:00 UTC daily
+    # Daily so green PRs automerge promptly; new PRs only open inside the
+    # schedule:weekly window (Monday before 04:00 Vienna), which 01:00 UTC hits.
+    - cron: '0 1 * * *'
   workflow_dispatch:
 
 # Overlapping runs would race on the same branches.
