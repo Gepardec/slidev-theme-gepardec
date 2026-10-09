@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":semanticCommits"],
+  "timezone": "Europe/Vienna",
+  "automergeStrategy": "merge-commit",
+  "platformAutomerge": false,
+  "lockFileMaintenance": {
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Merge non-breaking updates once CI is green; majors wait for a human.",
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+      "automerge": true
+    }
+  ]
+}
