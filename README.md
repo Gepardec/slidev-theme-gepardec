@@ -693,6 +693,24 @@ single final-state page; add the flag when the transcript is the point:
 npx slidev export example.md --with-clicks
 ```
 
+## Dependency updates
+
+[Renovate](https://docs.renovatebot.com/) keeps dependencies, the pnpm version
+and GitHub Actions current. `.github/workflows/renovate.yml` runs it daily and
+on every push to `main`; `renovate.json` holds the rules. Minor, patch, pin and
+digest updates merge themselves once the CI workflow is green. Majors stay open
+for review and are listed on the Dependency Dashboard issue.
+
+Commits follow the release rules: a bump to a runtime dependency is
+`fix(deps):` and ships a patch release, everything else is `chore(deps):`.
+
+The workflow needs a `RENOVATE_TOKEN` repository secret: a fine-grained token
+for this repository with read and write access to Contents, Pull requests,
+Issues, Commit statuses and Workflows. It cannot be `GITHUB_TOKEN`, because
+pull requests opened with that token do not trigger CI. Renovate merges as
+the token owner, so the owner needs a role that may bypass the review rule on
+`main`.
+
 ## License
 
 MIT — Gepardec IT Services GmbH
