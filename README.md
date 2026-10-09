@@ -706,7 +706,8 @@ Commits follow the release rules: a bump to a runtime dependency is
 
 The workflow needs a `RENOVATE_TOKEN` repository secret: a fine-grained token
 for this repository with read and write access to Contents, Pull requests,
-Issues, Commit statuses and Workflows. It cannot be `GITHUB_TOKEN`, because
+Issues, Commit statuses and Workflows, plus read access to Dependabot alerts
+so security fixes are raised right away. It cannot be `GITHUB_TOKEN`, because
 pull requests opened with that token do not trigger CI. Renovate merges as
 the token owner, so the owner needs a role that may bypass the review rule on
 `main`.
