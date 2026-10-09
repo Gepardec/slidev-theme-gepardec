@@ -1,13 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":semanticCommits",
-    ":timezone(Europe/Vienna)",
-    "schedule:weekly"
-  ],
+  "extends": ["config:best-practices", ":semanticCommits", ":timezone(Europe/Vienna)"],
+  "schedule": ["* * * * 1"],
   "minimumReleaseAge": "3 days",
-  "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
   "automergeStrategy": "merge-commit",
   "platformAutomerge": false,
@@ -19,6 +14,11 @@
     "automerge": true
   },
   "packageRules": [
+    {
+      "description": "best-practices limits lock file maintenance to early Monday; widen it to the repo schedule.",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "schedule": ["* * * * 1"]
+    },
     {
       "description": "Merge non-breaking updates once CI is green; majors wait for a human.",
       "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],

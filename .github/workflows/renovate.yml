@@ -7,8 +7,8 @@ on:
     branches:
       - main
   schedule:
-    # Daily so green PRs automerge promptly; new PRs only open inside the
-    # schedule:weekly window (Monday before 04:00 Vienna), which 01:00 UTC hits.
+    # Daily so green PRs automerge promptly. New PRs only open on Mondays
+    # (renovate.json schedule), which any daily time hits.
     - cron: '0 1 * * *'
   workflow_dispatch:
 
