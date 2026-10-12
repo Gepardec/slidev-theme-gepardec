@@ -1,3 +1,13 @@
 allowBuilds:
   lefthook: true
   playwright-chromium: true
+
+skills:
+  # Agent skills are managed with apm, so pnpm must never link any.
+  dirs: []
+
+overrides:
+  # magic-string 1.4.3 keeps text appended inside a range that update() then
+  # replaces, so UnoCSS's --uno: expansion in Slidev's code.css is emitted twice
+  # and the minifier rejects the build. Drop once a fixed release is out.
+  magic-string@1.4.3: 1.4.2
