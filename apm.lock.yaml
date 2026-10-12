@@ -1,11 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-09-08T15:28:05.297833+00:00'
-apm_version: 0.29.0
+generated_at: '2026-10-12T10:24:35.876438+00:00'
+apm_version: 0.33.0
 dependencies:
 - repo_url: anthropics/skills
   name: skill-creator
   host: github.com
-  resolved_commit: 41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f
+  resolved_commit: dbd4588f9e1033efb41dad4bef2f7947c8993d44
+  resolved_ref: dbd4588f9e1033efb41dad4bef2f7947c8993d44
   version: unknown
   virtual_path: skills/skill-creator
   is_virtual: true
@@ -50,10 +51,12 @@ dependencies:
     .claude/skills/skill-creator/scripts/run_loop.py: sha256:7bd6f674203168520517eec94c55f493c0d154339b061b4d7c0f0dad187d0f21
     .claude/skills/skill-creator/scripts/utils.py: sha256:3af8ae62c40c73ab712207436a0d9a981e845f25c5a7040229eb189cc8e45bb1
   content_hash: sha256:b2bfe91d69ca99994c0566baede889e7d2b9bb8791c6b6106c5d387392f717f6
+  is_dev: true
 - repo_url: slidevjs/slidev
   name: slidev
   host: github.com
-  resolved_commit: a8d8ff717c5a72c1b3a9d98f1c849481f2ddcd00
+  resolved_commit: 30a0a54c8739b4b395d9b336a6304cc8ebcc3947
+  resolved_ref: 30a0a54c8739b4b395d9b336a6304cc8ebcc3947
   version: unknown
   virtual_path: skills/slidev
   is_virtual: true
@@ -130,13 +133,13 @@ dependencies:
     .claude/skills/slidev/references/code-import-snippet.md: sha256:3f794e2387c70415f436ce70b248a6101122fa2b6e2dd983b3557a97f5e58510
     .claude/skills/slidev/references/code-line-highlighting.md: sha256:4571a5faf1111fd4bf0a30d331cfa5623d4052cc084ee83831e02abb6873968f
     .claude/skills/slidev/references/code-line-numbers.md: sha256:f69d767362dc135062899bb15037aba8f2be78e428daff55c4863732b1584858
-    .claude/skills/slidev/references/code-magic-move.md: sha256:78121e4b2006bb3dae3b09c32fc547c42eca452935a6e4dcecad6add570f088d
+    .claude/skills/slidev/references/code-magic-move.md: sha256:2378e0aa7422dffc45fa2b2a4e83c9528eb978d021da5697eadfafd2eba45cf8
     .claude/skills/slidev/references/code-max-height.md: sha256:6f7ec03bf10559f37c9d144d0339de0a850590a6f40e3bfc1471561ba1f0505b
     .claude/skills/slidev/references/code-twoslash.md: sha256:12d80b5fbdd8fcf1a60e8a97d2cbb6861745d9839aa6d5c826d28550a771b3b7
     .claude/skills/slidev/references/core-animations.md: sha256:a3f8d12f06af0164025dcdbe450c198689f3a8a69eb1dc62fca0850ebcb2685d
-    .claude/skills/slidev/references/core-cli.md: sha256:99895522b6fd3cf563e9a9a12575edfee7f503a4d3d6535fd9abe78cf1fdadfa
+    .claude/skills/slidev/references/core-cli.md: sha256:c91cc8d859591ab69d382eea6aef7f8d2e996b09b2be89cd79c681b0d6baf499
     .claude/skills/slidev/references/core-components.md: sha256:43529b1f7467ff9cdea0bdf71241eae3cd7bcf62bfc9391aabce38545bca634d
-    .claude/skills/slidev/references/core-exporting.md: sha256:6c22209942852d60f18d8be7fc429446ec513dfd12a45cbc0335e8419d61987d
+    .claude/skills/slidev/references/core-exporting.md: sha256:034631ab8c0f0e9f7782c0bd22c542386642e8b3b1cd2fe6e21f468f9d6f6050
     .claude/skills/slidev/references/core-frontmatter.md: sha256:044861667fee30b63358429d555770552913cc5f3e59569ec0c82d6347716513
     .claude/skills/slidev/references/core-global-context.md: sha256:1bd3884b31819b9cb4b7957000d06dcbf56678b742aa1aa6bbc7145b4f8ff98d
     .claude/skills/slidev/references/core-headmatter.md: sha256:1421e7bf36551e2c220a57c74eeec7755210916a6dc68c57de128a225fb2eb99
@@ -171,7 +174,8 @@ dependencies:
     .claude/skills/slidev/references/syntax-importing-slides.md: sha256:5121a7fa19dd0496c4f5f42be0204ada7fb17484665727a1d259e31451c5ef42
     .claude/skills/slidev/references/tool-eject-theme.md: sha256:c25fb0debc1af89bfe7aad1be3f09c67a9f97eafb051cb852063eaf1c9b995b0
     .claude/skills/slidev/references/tool-mcp.md: sha256:00aabc8ba38e0376ee5aad8b511e723b9e67fc567cb4899c00e441650ad44ab8
-  content_hash: sha256:c151d2dee2b4caab569071c58893926728fbba7c71e3f9050ac4553fcd8a345e
+  content_hash: sha256:99d7d02a0835a4025f2afd096ec6be41e530dbefd36e467662ab2c0a60ce55a1
+  is_dev: true
 deployments:
 - kind: project-relative
   target: claude
@@ -523,7 +527,7 @@ deployments:
   owners:
   - slidevjs/slidev/skills/slidev
   active_owner: slidevjs/slidev/skills/slidev
-  content_hash: sha256:78121e4b2006bb3dae3b09c32fc547c42eca452935a6e4dcecad6add570f088d
+  content_hash: sha256:2378e0aa7422dffc45fa2b2a4e83c9528eb978d021da5697eadfafd2eba45cf8
 - kind: project-relative
   target: claude
   value: .claude/skills/slidev/references/code-max-height.md
@@ -559,7 +563,7 @@ deployments:
   owners:
   - slidevjs/slidev/skills/slidev
   active_owner: slidevjs/slidev/skills/slidev
-  content_hash: sha256:99895522b6fd3cf563e9a9a12575edfee7f503a4d3d6535fd9abe78cf1fdadfa
+  content_hash: sha256:c91cc8d859591ab69d382eea6aef7f8d2e996b09b2be89cd79c681b0d6baf499
 - kind: project-relative
   target: claude
   value: .claude/skills/slidev/references/core-components.md
@@ -577,7 +581,7 @@ deployments:
   owners:
   - slidevjs/slidev/skills/slidev
   active_owner: slidevjs/slidev/skills/slidev
-  content_hash: sha256:6c22209942852d60f18d8be7fc429446ec513dfd12a45cbc0335e8419d61987d
+  content_hash: sha256:034631ab8c0f0e9f7782c0bd22c542386642e8b3b1cd2fe6e21f468f9d6f6050
 - kind: project-relative
   target: claude
   value: .claude/skills/slidev/references/core-frontmatter.md
