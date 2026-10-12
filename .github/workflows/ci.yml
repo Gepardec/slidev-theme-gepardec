@@ -1,0 +1,47 @@
+name: CI
+
+# The checks Renovate waits for before it automerges. Anything that would break
+# a release or the gallery has to fail here, not on main.
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: pnpm audit signatures
+
+      - name: Check theme surfaces
+        run: pnpm check:surfaces
+
+      - name: Build example
+        run: pnpm build
+
+      - name: Build gallery
+        run: pnpm build:gallery

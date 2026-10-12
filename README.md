@@ -693,6 +693,12 @@ single final-state page; add the flag when the transcript is the point:
 npx slidev export example.md --with-clicks
 ```
 
+## Dependency updates
+
+[Renovate](https://docs.renovatebot.com/) keeps dependencies current. It runs
+as the Renovate GitHub app installed on the organisation, and `renovate.json`
+holds its rules.
+
 ## License
 
 MIT — Gepardec IT Services GmbH
