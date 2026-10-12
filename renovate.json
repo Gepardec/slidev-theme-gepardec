@@ -14,5 +14,9 @@
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "labels": ["security"]
+  },
+  "apm": {
+    "description": "apm lock file maintenance is off: it deletes apm.lock.yaml, which drops apm's ownership records for the committed .claude/skills folders, so apm skips them and writes a damaged lock. Re-enable once Renovate changes the maintenance flow, see https://github.com/renovatebot/renovate/pull/45683",
+    "lockFileMaintenance": { "enabled": false }
   }
 }

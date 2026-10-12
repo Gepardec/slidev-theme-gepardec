@@ -8,9 +8,12 @@ author: Oliver Tod
 targets:
   - claude
 dependencies:
-  apm:
-    - slidevjs/slidev/skills/slidev
-    - anthropics/skills/skills/skill-creator
+  apm: []
   mcp: []
+devDependencies:
+  apm:
+    - slidevjs/slidev/skills/slidev#30a0a54c8739b4b395d9b336a6304cc8ebcc3947 # v53.0.0
+    # anthropics/skills publishes no tags, so Renovate cannot track this pin; bump it with `apm update`.
+    - anthropics/skills/skills/skill-creator#dbd4588f9e1033efb41dad4bef2f7947c8993d44
 includes: auto
 scripts: {}
