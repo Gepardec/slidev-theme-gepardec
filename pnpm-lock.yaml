@@ -114,22 +114,22 @@ importers:
         version: 53.0.0(@modelcontextprotocol/server@2.1.0)(@nuxt/kit@3.21.8)(@vue/compiler-sfc@3.5.39)(cac@7.0.0)(rolldown@1.1.5)(srvx@1.0.5)(supports-color@7.2.0)(typescript@6.0.3)(vite@8.3.1(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.1))
     devDependencies:
       '@commitlint/cli':
-        specifier: ^21.2.1
+        specifier: 21.2.1
         version: 21.2.1(@types/node@22.20.1)(conventional-commits-parser@7.0.1)(typescript@6.0.3)
       '@commitlint/config-conventional':
-        specifier: ^21.2.0
+        specifier: 21.2.0
         version: 21.2.0
       '@slidev/cli':
-        specifier: ^53.0.0
+        specifier: 53.0.0
         version: 53.0.0(@nuxt/kit@3.21.8)(@oxc-project/types@0.151.0)(@types/markdown-it@14.1.2)(@types/node@22.20.1)(@vitejs/devtools-kit@0.4.12(@modelcontextprotocol/server@2.1.0)(cac@7.0.0)(srvx@1.0.5)(vite@8.3.1(@types/node@22.20.1)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.39)(cac@7.0.0)(hono@4.13.9)(lightningcss@1.32.0)(markdown-it@14.3.0)(oxc-parser@0.150.0)(playwright-chromium@1.63.0)(postcss@8.5.28)(rolldown@1.1.5)(srvx@1.0.5)(supports-color@7.2.0)
       lefthook:
-        specifier: ^2.1.10
+        specifier: 2.1.10
         version: 2.1.10
       playwright-chromium:
-        specifier: ^1.63.0
+        specifier: 1.63.0
         version: 1.63.0
       semantic-release:
-        specifier: ^25.0.5
+        specifier: 25.0.5
         version: 25.0.5(supports-color@7.2.0)(typescript@6.0.3)
 
 packages:
