@@ -11,7 +11,6 @@
   "minimumReleaseAge": "3 days",
   "prHourlyLimit": 0,
   "automergeStrategy": "merge-commit",
-  "platformAutomerge": false,
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "labels": ["security"]
