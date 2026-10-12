@@ -45,3 +45,24 @@ jobs:
 
       - name: Build gallery
         run: pnpm build:gallery
+
+  # Checks apm.lock.yaml against apm.yml and the committed .claude/skills bytes.
+  # setup-only keeps `apm install` from rewriting the checkout before the audit.
+  # --no-drift: the install replay treats the root skills/ folder as the
+  # package's skills instead of .apm/skills/, so it reports false drift.
+  apm-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup APM
+        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
+        with:
+          setup-only: true
+          apm-version: '0.33.0'
+
+      - name: Audit APM lockfile and deployed files
+        run: apm audit --ci --no-drift
