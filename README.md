@@ -3,7 +3,8 @@
 A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 
 - Pure black background, Gepardec yellow (`#FFC800`) accents
-- Italic condensed typography (Barlow Semi Condensed) + JetBrains Mono for code
+- Italic condensed typography (Barlow Semi Condensed) + JetBrains Mono for code,
+  bundled with the theme — decks render and export offline, no Google Fonts request
 - `//` bullet markers in yellow, white content text
 - `gepardec` logo and corner spots on every slide; cheetah sujet on cover/section/contact
 - No bordered content boxes — clean, minimal aesthetic

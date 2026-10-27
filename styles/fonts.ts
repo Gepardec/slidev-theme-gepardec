@@ -1,0 +1,23 @@
+// The brand fonts ship with the theme so decks render correctly offline.
+// Slidev's Google Fonts link is switched off with `fonts.provider: 'none'`
+// in package.json; these imports cover the weights declared there.
+import '@fontsource/barlow-semi-condensed/300.css'
+import '@fontsource/barlow-semi-condensed/300-italic.css'
+import '@fontsource/barlow-semi-condensed/400.css'
+import '@fontsource/barlow-semi-condensed/400-italic.css'
+import '@fontsource/barlow-semi-condensed/500.css'
+import '@fontsource/barlow-semi-condensed/500-italic.css'
+import '@fontsource/barlow-semi-condensed/600.css'
+import '@fontsource/barlow-semi-condensed/600-italic.css'
+import '@fontsource/barlow-semi-condensed/700.css'
+import '@fontsource/barlow-semi-condensed/700-italic.css'
+import '@fontsource/jetbrains-mono/300.css'
+import '@fontsource/jetbrains-mono/300-italic.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/400-italic.css'
+import '@fontsource/jetbrains-mono/500.css'
+import '@fontsource/jetbrains-mono/500-italic.css'
+import '@fontsource/jetbrains-mono/600.css'
+import '@fontsource/jetbrains-mono/600-italic.css'
+import '@fontsource/jetbrains-mono/700.css'
+import '@fontsource/jetbrains-mono/700-italic.css'
