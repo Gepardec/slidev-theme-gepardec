@@ -207,8 +207,12 @@
   font-weight: 600;
 }
 
+/* Body copy is italic, so emphasis inverts: an author's `*italic*` sets
+   upright, the way a book sets emphasis inside an italic passage. Where a
+   layout has already set its copy upright, it turns emphasis back to italic. */
 .slidev-layout em {
   color: var(--gepardec-white);
+  font-style: normal;
 }
 
 .slidev-layout a {
