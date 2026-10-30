@@ -148,7 +148,9 @@ The standard content slide, and the right answer unless a slide genuinely needs
 a different shape. Headline, then ordinary markdown.
 
 - Bullets take the yellow `//` marker; nested bullets step down and dim.
-- **Bold** carries brand yellow, *italic* stays white.
+- **Bold** carries brand yellow, *italic* stays white. Body copy is already
+  italic, so `*emphasis*` inverts and sets upright; inside a `ChatTurn`, whose
+  body is upright, it sets italic.
 - The first paragraph after the headline is set a step larger and in grey — a
   lead line. Later paragraphs are ordinary body copy.
 - Five bullets is comfortable, eight is the limit. See

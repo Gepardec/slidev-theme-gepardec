@@ -147,7 +147,7 @@ The standard content slide. The first heading is the headline; everything after 
 
 - Bullets take the yellow `//` marker
   - Nested bullets step down a size and dim their marker
-- **Bold** carries the brand yellow, *italic* stays white
+- **Bold** carries the brand yellow, *italic* stays white and sets upright against the italic body
 - A [link](https://www.gepardec.com) is yellow with a dim underline
 - `inline code` is set in JetBrains Mono
 

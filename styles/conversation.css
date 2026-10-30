@@ -84,6 +84,12 @@
   color: inherit;
 }
 
+/* The body is upright, so emphasis inverts back to italic. Scoped under
+   `.slidev-layout` to outrank the theme's upright `em`. */
+.slidev-layout .chat-turn__body em {
+  font-style: italic;
+}
+
 .chat-turn__body p:last-child,
 .chat-turn__body ul:last-child,
 .chat-turn__body ol:last-child,

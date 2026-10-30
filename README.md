@@ -5,6 +5,7 @@ A [Slidev](https://sli.dev) theme matching the Gepardec brand:
 - Pure black background, Gepardec yellow (`#FFC800`) accents
 - Italic condensed typography (Barlow Semi Condensed) + JetBrains Mono for code,
   bundled with the theme — decks render and export offline, no Google Fonts request
+- `*Emphasis*` inverts against the italic body copy and sets upright
 - `//` bullet markers in yellow, white content text
 - `gepardec` logo and corner spots on every slide; cheetah sujet on cover/section/contact
 - No bordered content boxes — clean, minimal aesthetic
@@ -471,7 +472,8 @@ the role cap (`who="Max"`), `meta` adds a muted note beside it
 
 Message bodies are set upright, against the master's italic: a paragraph of
 transcript at this size is punishing in italic, so the italics stay on the caps
-and headlines. Inline `code` also drops the master's yellow chip inside a turn —
+and headlines. `*Emphasis*` inverts with it: upright in body copy, italic inside
+a turn. Inline `code` also drops the master's yellow chip inside a turn —
 one sentence of agent output can carry six of them, and six chips is a rash
 rather than an emphasis.
 
