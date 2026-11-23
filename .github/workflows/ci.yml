@@ -59,7 +59,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup APM
-        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
+        uses: microsoft/apm-action@176186397bcf6d997b4ef8d3433bfb3db37fe630 # v1.11.0
         with:
           setup-only: true
           apm-version: '0.33.0'
